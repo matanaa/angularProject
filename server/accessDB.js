@@ -54,19 +54,21 @@ module.exports = {
     console.log('*** accessDB.insertCustomer');
 
     var customer = new Customer();
-    var s = {'id': state[0].id, 'abbreviation': state[0].abbreviation, 'name': state[0].name}
+   // var s = {'id': state[0].id, 'abbreviation': state[0].abbreviation, 'name': state[0].name}
 
     customer.firstName = req_body.firstName;
     customer.lastName = req_body.lastName;
     customer.email = req_body.email;
     customer.address = req_body.address;
     customer.city = req_body.city;
-    customer.state = s;
-    customer.stateId = state[0].id;
-    customer.zip = req_body.zip;
+    //customer.state = s;
+    //customer.stateId = state[0].id;
+    //customer.zip = req_body.zip;
     customer.gender = req_body.gender;
     customer.id = 1; // The id is calculated by the Mongoose pre 'save'.
-
+    customer.password=req_body.password;
+    customer.isAdmin=req_body.isAdmin;
+    customer.creditCard=req_body.creditCard;
     customer.save(function(err, customer) {
       if (err) {console.log('*** new customer save err: ' + err); return callback(err); }
 
