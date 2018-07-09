@@ -32,6 +32,13 @@ module.exports = {
       callback(null, customers);
     });
   },
+    // get all the Products
+    getproducts: function(callback) {
+        console.log('*** accessDB.getCustomers');
+        Product.find({}, function(err, Product) {
+            callback(null, Product);
+        });
+    },
 
   // get the customer summary
   getCustomersSummary: function(callback) {
