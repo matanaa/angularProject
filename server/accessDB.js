@@ -2,6 +2,7 @@
 var mongoose = require('mongoose')
   , Schema = mongoose.Schema
   , Customer = require('./models/customer')
+  , Product = require('./models/product')
   , State = require('./models/state')
   , util = require('util');
 
@@ -33,14 +34,36 @@ module.exports = {
     });
   },
     // get all the Products
-    getproducts: function(callback) {
-        console.log('*** accessDB.getCustomers');
-        Product.find({}, function(err, Product) {
-            callback(null, Product);
+    getProducts: function(callback) {
+        console.log('*** accessDB.getProducts');
+        Product.find({},{"_id" :0,"name" : 1,"price" : 1,"type" : 1,"stock" : 1,"producer" : 1,"images" : 1}, function(err, Product) {
+    callback(null, Product);
+});
+},
+
+
+    // insert a  Product
+    insertProduct: function(req_body, state, callback) {
+        console.log('*** accessDB.insertProduct');
+
+        var product = new Product();
+        // var s = {'id': state[0].id, 'abbreviation': state[0].abbreviation, 'name': state[0].name}
+
+        product.Name = req_body.Name;
+        product.price = req_body.price;
+        product.type = req_body.type;
+        product.stock = req_body.stock;
+        product.producer = req_body.producer;
+        product.save(function(err, product) {
+            if (err) {console.log('*** new product save err: ' + err); return callback(err); }
+
+            callback(null, product._id);
         });
     },
 
-  // get the customer summary
+
+
+    // get the customer summary
   getCustomersSummary: function(callback) {
     console.log('*** accessDB.getCustomersSummary');
     Customer.find({}, {'_id': 0, 'firstName':1, 'lastName':1, 'city': 1, 'state': 1, 'stateId': 1, 'orders': 1, 'orderCount': 1, 'gender': 1, 'id': 1}, function(err, customersSummary) {
