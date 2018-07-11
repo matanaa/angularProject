@@ -2,6 +2,23 @@ var db = require('../accessDB')
   , util = require('util');
 
 // GET
+exports.products = function (req, res) {
+    console.log('*** products');
+
+    db.getProducts(function(err, products) {
+        if (err) {
+            console.log('*** products err');
+            res.json({
+                products: products
+            });
+        } else {
+            console.log('*** products ok');
+
+            res.json(products);
+        }
+    });
+};
+
 exports.customers = function (req, res) {
   console.log('*** customers');
 
