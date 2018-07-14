@@ -19,6 +19,24 @@ exports.products = function (req, res) {
     });
 };
 
+
+exports.addProduct = function (req, res) {
+    console.log('*** addProduct');
+
+            db.insertProduct(req.body,  function(err){
+                if (err) {
+                    console.log('*** addproducts err');
+                    res.json(false);
+                } else {
+                    console.log('*** addproducts ok');
+
+                    res.json(req.body);
+                }
+            });
+
+};
+
+
 exports.customers = function (req, res) {
   console.log('*** customers');
 

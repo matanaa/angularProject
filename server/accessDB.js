@@ -26,24 +26,18 @@ module.exports = {
     mongoose.disconnect();
   },
 
-  // get all the customers
-  getCustomers: function(callback) {
-    console.log('*** accessDB.getCustomers');
-    Customer.find({}, {'_id': 0, 'firstName':1, 'lastName':1, 'city': 1, 'state': 1, 'stateId': 1, 'orders': 1, 'orderCount': 1, 'gender': 1, 'id': 1}, function(err, customers) {
-      callback(null, customers);
-    });
-  },
+
     // get all the Products
     getProducts: function(callback) {
         console.log('*** accessDB.getProducts');
         Product.find({},{"_id" :0,"name" : 1,"price" : 1,"type" : 1,"stock" : 1,"producer" : 1,"images" : 1}, function(err, Product) {
-    callback(null, Product);
-});
-},
+            callback(null, Product);
+        });
+    },
 
 
     // insert a  Product
-    insertProduct: function(req_body, state, callback) {
+    insertProduct: function(req_body,  callback) {
         console.log('*** accessDB.insertProduct');
 
         var product = new Product();
@@ -60,6 +54,17 @@ module.exports = {
             callback(null, product._id);
         });
     },
+
+
+
+  // get all the customers
+  getCustomers: function(callback) {
+    console.log('*** accessDB.getCustomers');
+    Customer.find({}, {'_id': 0, 'firstName':1, 'lastName':1, 'city': 1, 'state': 1, 'stateId': 1, 'orders': 1, 'orderCount': 1, 'gender': 1, 'id': 1}, function(err, customers) {
+      callback(null, customers);
+    });
+  },
+
 
 
 
@@ -148,23 +153,23 @@ module.exports = {
     Customer.find({'email': email}, {'_id': 1}, function(err, customer) {
       callback(null, customer[0]);
     });
-  },
+  }
 
 // get all the states
-  getStates: function(callback) {
-    console.log('*** accessDB.getStates');
-    State.find({}, {}, function(err, states) {
-      callback(null, states);
-    });
-  },
+//   getStates: function(callback) {
+//     console.log('*** accessDB.getStates');
+//     State.find({}, {}, function(err, states) {
+//       callback(null, states);
+//     });
+//   },
 
 // get a state
-  getState: function(stateId, callback) {
-    console.log('*** accessDB.getState');
-    State.find({'id': stateId}, {}, function(err, state) {
-      callback(null, state);
-    });
-  }
+//   getState: function(stateId, callback) {
+//     console.log('*** accessDB.getState');
+//     State.find({'id': stateId}, {}, function(err, state) {
+//       callback(null, state);
+//     });
+//   }
 
 
 }
