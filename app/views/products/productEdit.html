@@ -1,0 +1,109 @@
+﻿<div class="view">
+    <div class="container">
+        <header>
+            <h3>{{title}} product</h3>
+        </header>
+        <form name="editForm" novalidate>
+            <div>
+                <div class="row">
+                    <div class="span12">
+                        <h4>{{ product.Name}} <!--(<a style="font-size:12pt" href="#/customerorders/{{customer.id}}">View Orders</a>)--></h4>
+                        <br />
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="span2">
+                        Name:
+                    </div>
+                    <div class="span10">
+                        <input type="text" name="name" data-ng-model="product.Name" required />
+                        <span class="errorMessage" ng-show="editForm.Name.$dirty && editForm.Name.$invalid">
+                            Name is required
+                        </span>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="span2">
+                        Type:
+                    </div>
+                    <div class="span10">
+                        <input type="text" data-ng-model="product.type" required />
+                        <span class="errorMessage" ng-show="editForm.type.$dirty && editForm.type.$invalid">
+                            Type is required
+                        </span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="span2">
+                        Price:
+                    </div>
+                    <div class="span10">
+                        <input type="text" data-ng-model="product.price" required />
+                        <span class="errorMessage" ng-show="editForm.price.$dirty && editForm.price.$invalid">
+                            Price is required
+                        </span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="span2">
+                        stock:
+                    </div>
+                    <div class="span10">
+                        <input type="text" data-ng-model="product.stock" required />
+                        <span class="errorMessage" ng-show="editForm.stock.$dirty && editForm.stock.$invalid">
+                            Stock is required
+                        </span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="span2">
+                        Producer:
+                    </div>
+                    <div class="span10">
+                        <input type="text" data-ng-model="product.product" required />
+                        <span class="errorMessage" ng-show="editForm.product.$dirty && editForm.product.$invalid">
+                            Producer is required
+                        </span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="span2">
+                        Images:
+                    </div>
+                    <div class="span10">
+                        <input type="text" data-ng-model="product.images" required />
+                        <span class="errorMessage" ng-show="editForm.images.$dirty && editForm.images.$invalid">
+                            Images is required
+                        </span>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="span12">
+                        <button type="submit" class="btn btn-primary" data-ng-click="saveCustomer()" ng-disabled="editForm.$invalid || !editForm.$dirty">{{buttonText}}</button>
+                        &nbsp;&nbsp;
+                        <button class="btn btn-danger" data-ng-if="customer.id > 0" data-ng-click="deleteCustomer()">Delete</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <br />
+                    <div class="span10 label label-success show-hide-animation" data-ng-show="updateStatus">
+                        <i class="icon-thumbs-up icon-white"></i>&nbsp;&nbsp;Customer updated!
+                    </div>
+                    <div class="span10 label label-important show-hide-animation" data-ng-show="errorMessage">
+                        <i class="icon-thumbs-down icon-white"></i>&nbsp;&nbsp;Error: {{ errorMessage }}
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

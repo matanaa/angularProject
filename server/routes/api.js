@@ -131,6 +131,8 @@ exports.deleteCustomer = function (req, res) {
 // GET
 exports.states = function (req, res) {
   console.log('*** states');
+    res.json({});
+    //TODO: delete all calls to this function
   db.getStates(function(err, states) {
 
     if (err) {

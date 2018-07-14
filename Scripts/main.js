@@ -18,7 +18,8 @@ require(
         'filters/nameCityStateFilter',
         'filters/nameProductFilter',
         'controllers/navbarController',
-        'controllers/orders/orderChildController'
+        'controllers/orders/orderChildController',
+        'services/productsService'
     ],
     function () {
         angular.bootstrap(document, ['customersApp']);

@@ -34,6 +34,7 @@ define(['services/routeResolver'], function () {
                 .when('/customeredit/:customerID', route.resolve('CustomerEdit', 'customers/'))
                 .when('/orders', route.resolve('Orders', 'orders/'))
                 .when('/about', route.resolve('About'))
+                .when('/productedit/:customerID', route.resolve('productEdit', 'products/'))
                 .otherwise({ redirectTo: '/customers' });
 
     }]);
