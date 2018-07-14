@@ -67,8 +67,8 @@
                         Producer:
                     </div>
                     <div class="span10">
-                        <input type="text" data-ng-model="product.product" required />
-                        <span class="errorMessage" ng-show="editForm.product.$dirty && editForm.product.$invalid">
+                        <input type="text" data-ng-model="product.producer" required />
+                        <span class="errorMessage" ng-show="editForm.producer.$dirty && editForm.producer.$invalid">
                             Producer is required
                         </span>
                     </div>
@@ -89,7 +89,7 @@
 
                 <div class="row">
                     <div class="span12">
-                        <button type="submit" class="btn btn-primary" data-ng-click="saveCustomer()" ng-disabled="editForm.$invalid || !editForm.$dirty">{{buttonText}}</button>
+                        <button type="submit" class="btn btn-primary" data-ng-click="saveProduct()" ng-disabled="editForm.$invalid || !editForm.$dirty">{{buttonText}}</button>
                         &nbsp;&nbsp;
                         <button class="btn btn-danger" data-ng-if="customer.id > 0" data-ng-click="deleteCustomer()">Delete</button>
                     </div>
