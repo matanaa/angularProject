@@ -49,5 +49,5 @@ BranchSchema.pre('save', function(next) {
     }
 });
 
-exports.BranchSchema = BranchSchema;
-module.exports = mongoose.model('Users', BranchSchema);
+exports.Branch = BranchSchema;
+module.exports = mongoose.model('Branches', BranchSchema);
