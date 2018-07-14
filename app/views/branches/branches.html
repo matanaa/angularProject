@@ -1,4 +1,4 @@
-<div class="branches view indent">
+<div class="view">
     <div class="container">
         <header>
             <h3>Branches</h3>
@@ -51,7 +51,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr data-ng-repeat="branch in filteredbranches | orderBy:orderby:reverse" class="repeat-animation">
+                        <tr data-ng-repeat="branch in filteredBranches | orderBy:orderby:reverse" class="repeat-animation">
                             <td><a href="#/branchedit/{{branch.id}}">{{branch.type}}</a></td>
                             <td><a href="#/branchedit/{{branch.id}}">{{branch.name}}</a></td>
                             <td>{{branch.name}}, {{branch.openingHours}}</td>
