@@ -37,6 +37,40 @@ exports.addProduct = function (req, res) {
 };
 
 
+exports.branches = function (req, res) {
+    console.log('*** branches');
+
+    db.getBranches(function(err, customers) {
+        if (err) {
+            console.log('*** branches err');
+            res.json({
+                branches: branches
+            });
+        } else {
+            console.log('*** customers ok');
+
+            res.json(customers);
+        }
+    });
+};
+
+exports.branch = function (req, res) {
+    console.log('*** customer');
+
+    db.getBranch(req.params.id, function(err, customer) {
+        if (err) {
+            console.log('*** customer err');
+            res.json({
+                branch: branch
+            });
+        } else {
+            console.log('*** customer ok');
+
+            res.json(customer);
+        }
+    });
+};
+
 exports.customers = function (req, res) {
   console.log('*** customers');
 
