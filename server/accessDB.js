@@ -83,11 +83,11 @@ module.exports = {
     },
 
 
-    // get a  customer
-    getCustomers: function(id, callback) {
+    // get all the customers
+    getCustomers: function(callback) {
         console.log('*** accessDB.getCustomers');
-        Customer.find({'id': id}, {}, function(err, customer) {
-            callback(null, customers[0]);
+        Customer.find({}, {'_id': 0, 'firstName':1, 'lastName':1, 'city': 1, 'state': 1, 'stateId': 1, 'orders': 1, 'orderCount': 1, 'gender': 1, 'id': 1}, function(err, customers) {
+            callback(null, customers);
         });
     },
 
@@ -103,12 +103,12 @@ module.exports = {
     getCustomer: function(id, callback) {
         console.log('*** accessDB.getCustomer');
         Customer.find({'id': id}, {}, function(err, customer) {
-            callback(null, customers[0]);
+            callback(null, customer);
         });
     },
 
     // insert a  customer
-    insertCustomer: function(req_body, state, callback) {
+    insertCustomer: function(req_body, callback) {
         console.log('*** accessDB.insertCustomer');
 
         var customer = new Customer();
