@@ -2,7 +2,7 @@
 
 define(['app'], function (app) {
 
-    var branchesController = function ($scope, $location, $filter, dataService, modalService) {
+    var branchesController = function ($scope, $location, $filter, branchesService, modalService) {
 
         $scope.branches = [];
         $scope.filteredBranches = [];
@@ -119,6 +119,6 @@ define(['app'], function (app) {
     };
 
     app.register.controller('BranchesController',
-        ['$scope', '$location', '$filter', 'dataService', 'modalService', branchesController]);
+        ['$scope', '$location', '$filter', 'branchesService', 'modalService', branchesController]);
 
 });

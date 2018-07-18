@@ -62,6 +62,7 @@ app.get('/api/dataservice/CustomersSummary', api.customersSummary);
 app.get('/api/dataservice/CustomerById/:id', api.customer);
 app.get('/api/dataservice/CheckUnique/:email', api.checkemail);
 
+app.get('/api/dataservice/Branches', api.branches);
 
 app.get('/api/dataservice/Products', api.products);
 app.post('/api/dataservice/addProduct', api.addProduct);

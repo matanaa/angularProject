@@ -61,8 +61,8 @@ module.exports = {
     // get all the branches
     getBranches: function(callback) {
         console.log('*** accessDB.getBranches');
-        Branch.find({'id': id}, {}, function(err, branch) {
-            callback(null, branch[0]);
+        Branch.find({'id': id}, {}, function(err, branches) {
+            callback(null, branches[0]);
         });
     },
 
@@ -76,9 +76,9 @@ module.exports = {
 
     // get a  branch
     getBranch: function(id, callback) {
-        console.log('*** accessDB.getCustomer');
+        console.log('*** accessDB.getBranch');
         Branch.find({'id': id}, {}, function(err, branch) {
-            callback(null, branch[0]);
+            callback(null, branch);
         });
     },
 
@@ -87,7 +87,7 @@ module.exports = {
     getCustomers: function(id, callback) {
         console.log('*** accessDB.getCustomers');
         Customer.find({'id': id}, {}, function(err, customer) {
-            callback(null, customer[0]);
+            callback(null, customers[0]);
         });
     },
 
@@ -103,7 +103,7 @@ module.exports = {
     getCustomer: function(id, callback) {
         console.log('*** accessDB.getCustomer');
         Customer.find({'id': id}, {}, function(err, customer) {
-            callback(null, customer[0]);
+            callback(null, customers[0]);
         });
     },
 

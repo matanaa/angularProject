@@ -40,33 +40,33 @@ exports.addProduct = function (req, res) {
 exports.branches = function (req, res) {
     console.log('*** branches');
 
-    db.getBranches(function(err, customers) {
+    db.getBranches(function(err, branches) {
         if (err) {
             console.log('*** branches err');
             res.json({
                 branches: branches
             });
         } else {
-            console.log('*** customers ok');
+            console.log('*** branches ok');
 
-            res.json(customers);
+            res.json(branches);
         }
     });
 };
 
 exports.branch = function (req, res) {
-    console.log('*** customer');
+    console.log('*** branch');
 
-    db.getBranch(req.params.id, function(err, customer) {
+    db.getBranch(req.params.id, function(err, branch) {
         if (err) {
-            console.log('*** customer err');
+            console.log('*** branch err');
             res.json({
                 branch: branch
             });
         } else {
-            console.log('*** customer ok');
+            console.log('*** branch ok');
 
-            res.json(customer);
+            res.json(branch);
         }
     });
 };
