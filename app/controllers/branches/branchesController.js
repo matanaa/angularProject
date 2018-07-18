@@ -1,6 +1,6 @@
 'use strict';
 
-define(['app'], function (app) {
+define(['app', 'services/branchesService'], function (app) {
 
     var branchesController = function ($scope, $location, $filter, branchesService, modalService) {
 
@@ -35,7 +35,7 @@ define(['app'], function (app) {
 
             modalService.showModal({}, modalOptions).then(function (result) {
                 if (result === 'ok') {
-                    dataService.deleteBranch(id).then(function () {
+                    branchesService.deleteBranch(id).then(function () {
                         for (var i = 0; i < $scope.branches.length; i++) {
                             if ($scope.branches[i].id == id) {
                                 $scope.branches.splice(i, 1);
@@ -92,7 +92,7 @@ define(['app'], function (app) {
         }
 
         function getBranchesSummary() {
-            dataService.getBranchesSummary($scope.currentPage - 1, $scope.pageSize)
+            branchesService.getBranchesSummary($scope.currentPage - 1, $scope.pageSize)
                 .then(function (data) {
                     $scope.totalRecords = data.totalRecords;
                     $scope.branches = data.results;
@@ -118,7 +118,11 @@ define(['app'], function (app) {
 
     };
 
-    app.register.controller('BranchesController',
+    // app.register.controller('branchesController',
+    //     ['$scope', '$location', '$filter', 'branchesService', 'modalService', branchesViewController]);
+
+
+    app.register.controller('branchesController',
         ['$scope', '$location', '$filter', 'branchesService', 'modalService', branchesController]);
 
 });
