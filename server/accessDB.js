@@ -61,7 +61,7 @@ module.exports = {
     // get all the branches
     getBranches: function(callback) {
         console.log('*** accessDB.getBranches');
-        Branch.find({'id': id}, {}, function(err, branches) {
+        Branch.find({}, {}, function(err, branches) {
             callback(null, branches[0]);
         });
     },

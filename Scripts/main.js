@@ -19,7 +19,8 @@ require(
         'filters/nameProductFilter',
         'controllers/navbarController',
         'controllers/orders/orderChildController',
-        'services/productsService'
+        'services/productsService',
+        'services/branchesService'
     ],
     function () {
         angular.bootstrap(document, ['customersApp']);
