@@ -63,33 +63,32 @@ define(['app'], function (app) {
         };
 
         function extendBranches(branches) {
-            var branchesLen = branches.length;
-            //Iterate through customers
-            for (var i = 0; i < branchesLen; i++) {
-                var branch = branches[i];
-                if (!branch.orders) branch.orders = [];
-
-                var ordersLen = cust.orders.length;
-                for (var j = 0; j < ordersLen; j++) {
-                    var order = cust.orders[j];
-                    order.orderTotal = order.quantity * order.price;
-                }
-                cust.ordersTotal = ordersTotal(cust);
-            }
+            // var branchesLen = branches.length;
+            // //Iterate through customers
+            // for (var i = 0; i < branchesLen; i++) {
+            //     var branch = branches[i];
+            //     if (!branch.orders) branch.orders = [];
+            //
+            //     var ordersLen = cust.orders.length;
+            //     for (var j = 0; j < ordersLen; j++) {
+            //         var order = cust.orders[j];
+            //         order.orderTotal = order.quantity * order.price;
+            //     }
+            //     cust.ordersTotal = ordersTotal(cust);
+            // }
         }
-        //
-        // function getPagedResource(baseResource, pageIndex, pageSize) {
-        //     var resource = baseResource;
-        //     resource += (arguments.length == 3) ? buildPagingUri(pageIndex, pageSize) : '';
-        //     return $http.get(serviceBase + resource).then(function (response) {
-        //         var custs = response.data;
-        //         extendCustomers(custs);
-        //         return {
-        //             totalRecords: parseInt(response.headers('X-InlineCount')),
-        //             results: custs
-        //         };
-        //     });
-        // }
+
+        function getPagedResource(baseResource, pageIndex, pageSize) {
+            var resource = baseResource;
+            resource += (arguments.length == 3) ? buildPagingUri(pageIndex, pageSize) : '';
+            return $http.get(serviceBase + resource).then(function (response) {
+                var branches = response.data;
+                return {
+                    totalRecords: parseInt(response.headers('X-InlineCount')),
+                    results: branches
+                };
+            });
+        }
 
         function buildPagingUri(pageIndex, pageSize) {
             var uri = '?$top=' + pageSize + '&$skip=' + (pageIndex * pageSize);
