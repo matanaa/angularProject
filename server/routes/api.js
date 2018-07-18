@@ -71,6 +71,23 @@ exports.branch = function (req, res) {
     });
 };
 
+
+exports.branchesSummary = function (req, res) {
+    console.log('*** branchesSummary');
+    db.getBranchesSummary(function(err, branchesSummary) {
+        if (err) {
+            console.log('*** branchesSummary err');
+            res.json({
+                data: branchesSummary
+            });
+        } else {
+            console.log('*** branchesSummary ok');
+            res.json(branchesSummary);
+        }
+    });
+};
+
+
 exports.customers = function (req, res) {
   console.log('*** customers');
 
