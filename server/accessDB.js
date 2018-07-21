@@ -7,6 +7,8 @@ var mongoose = require('mongoose')
   , State = require('./models/state')
   , util = require('util');
 
+var jwt= require('jsonwebtoken'); // used to create, sign, and verify tokens
+
 // connect to database
 module.exports = {
   // Define class variable
@@ -181,6 +183,35 @@ module.exports = {
             callback(null);
         });
     },
+
+
+
+
+    authenticate: function(email,password, callback){
+        console.log('*** accessDB.authenticate');
+        Customer.findOne({'email': email}, function(err, user) {
+            if (err || user==null) { console.log('*** accessDB.authenticate:customer not found ' + err);
+                callback("customer not found ",null); }
+            else if (user.password != password){
+                console.log('*** accessDB.authenticate:customer worng password ');
+                callback("wrong Password", null);
+            }else{
+
+                const payload = {
+                    admin: user.isAdmin,
+                    user: user.firstName+ " "+user.lastName
+                };
+                var token = jwt.sign(payload, "mamamama", {
+                   // expiresInMinutes: 1440 // expires in 24 hours
+                });
+                console.log('*** accessDB.authenticate:customer send token');
+                callback(null, token);
+
+            }
+
+        });
+    },
+
 
 
 

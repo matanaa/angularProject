@@ -9,6 +9,9 @@ var express = require('express')
   , DB = require('./accessDB').AccessDB
   , protectJSON = require('./lib/protectJSON');
 
+
+
+
 var app = module.exports = express();
 
 var DB = require('./accessDB');
@@ -19,6 +22,7 @@ app.configure(function(){
   app.use(protectJSON);
   app.set('views', __dirname + '/views');
   app.set('view engine', 'jade');
+  app.set('login secret', 'matan the king !!!');
   app.use(express.cookieParser()); //*
   app.use(express.session({ secret: 'gopalapuram' })); //*
   app.use(express.bodyParser());
@@ -61,6 +65,7 @@ app.get('/api/dataservice/States', api.states);
 app.get('/api/dataservice/CustomersSummary', api.customersSummary);
 app.get('/api/dataservice/CustomerById/:id', api.customer);
 app.get('/api/dataservice/CheckUnique/:email', api.checkemail);
+app.post('/api/dataservice/login', api.authenticate);
 
 app.get('/api/dataservice/Branches', api.branches);
 app.get('/api/dataservice/BranchesSummary', api.branchesSummary);

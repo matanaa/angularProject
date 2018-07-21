@@ -204,23 +204,34 @@ exports.deleteCustomer = function (req, res) {
   });
 };
 
+
+
+
+exports.authenticate = function (req, res) {
+    console.log('*** authenticate');
+
+    db.authenticate(req.body.email,req.body.password, function(err, token) {
+        if (err) {
+            console.log('*** login err');
+            res.json({'status': false});
+        } else {
+            console.log('*** login ok');
+            res.json({'status': true,
+                'token' : token
+            });
+        }
+    });
+};
+
+
+
 // GET
 exports.states = function (req, res) {
   console.log('*** states');
     res.json({});
     //TODO: delete all calls to this function
-  db.getStates(function(err, states) {
+    res.json({});
 
-    if (err) {
-      console.log('*** states err');
-      res.json({
-        states: states
-      });
-    } else {
-      console.log('*** states ok');
-      res.json(states);
-    }
-  });
 };
 
 exports.customersSummary = function (req, res) {
