@@ -13,20 +13,21 @@ define(['app'], function (app) {
                 }
                 return false;
             }
+
+            return true;
         }
 
-        return function (customers, filterValue) {
-            if (!filterValue || !customers) return customers;
+        return function (products, filterValue) {
+            if (!filterValue || !products) return products;
 
             var matches = [];
             filterValue = filterValue.toLowerCase();
-            for (var i = 0; i < customers.length; i++) {
-                var cust = customers[i];
-                if (cust.firstName.toLowerCase().indexOf(filterValue) > -1 ||
-                    cust.lastName.toLowerCase().indexOf(filterValue) > -1 ||
-                    matchesProduct(cust, filterValue)) {
+            for (var i = 0; i < products.length; i++) {
+                var product = products[i];
+                if (product.name.toLowerCase().indexOf(filterValue) > -1 ){// ||
+                    //matchesProduct(product, filterValue)) {
 
-                    matches.push(cust);
+                    matches.push(product);
 
                 }
             }

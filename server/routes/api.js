@@ -36,6 +36,36 @@ exports.addProduct = function (req, res) {
 
 };
 
+exports.deleteProduct = function (req, res) {
+    console.log('*** deleteProduct');
+
+    db.deleteProduct(req.params.id, function(err) {
+        if (err) {
+            console.log('*** deleteProduct err');
+            res.json({'status': false});
+        } else {
+            console.log('*** deleteProduct ok');
+            res.json({'status': true});
+        }
+    });
+};
+
+exports.productsSummary = function (req, res) {
+    console.log('*** productsSummary');
+    db.getProductsSummary(function(err, productsSummary) {
+        if (err) {
+            console.log('*** productsSummary err');
+            res.json({
+                data: productsSummary
+            });
+        } else {
+            console.log('*** productsSummary ok');
+            res.json(productsSummary);
+        }
+    });
+};
+
+
 
 exports.branches = function (req, res) {
     console.log('*** branches');

@@ -4,13 +4,13 @@ define(['app', 'services/productsService'], function (app) {
 
     var productsController = function ($rootScope, $scope, $location, $routeParams, $timeout, config, productsService, modalService) {
 
-        var customerID = ($routeParams.customerID) ? parseInt($routeParams.customerID) : 0,
+        var productID = ($routeParams.productID) ? parseInt($routeParams.productID) : 0,
             timer,
             onRouteChangeOff;
 
-        $scope.customer;
-        $scope.title = (customerID > 0) ? 'Edit' : 'Add';
-        $scope.buttonText = (customerID > 0) ? 'Update' : 'Add';
+        $scope.product;
+        $scope.title = (productID > 0) ? 'Edit' : 'Add';
+        $scope.buttonText = (productID > 0) ? 'Update' : 'Add';
         $scope.updateStatus = false;
         $scope.errorMessage = '';
 
@@ -25,33 +25,33 @@ define(['app', 'services/productsService'], function (app) {
                     productsService.insertProduct($scope.product).then(processSuccess, processError);
                 }
                 else {
-                    productsService.updateCustomer($scope.customer).then(processSuccess, processError);
+                    productsService.updateCustomer($scope.product).then(processSuccess, processError);
                 }
             }
         };
 
-        $scope.deleteCustomer = function () {
-            var custName = $scope.customer.firstName + ' ' + $scope.customer.lastName;
+        $scope.deleteProduct = function () {
+            var productName = $scope.product.name;
             var modalOptions = {
                 closeButtonText: 'Cancel',
-                actionButtonText: 'Delete Customer',
-                headerText: 'Delete ' + custName + '?',
-                bodyText: 'Are you sure you want to delete this customer?'
+                actionButtonText: 'Delete Product',
+                headerText: 'Delete ' + productName + '?',
+                bodyText: 'Are you sure you want to delete this product?'
             };
 
             modalService.showModal({}, modalOptions).then(function (result) {
                 if (result === 'ok') {
-                    productsService.deleteCustomer($scope.customer.id).then(function () {
+                    productsService.deleteProduct($scope.product.id).then(function () {
                         onRouteChangeOff(); //Stop listening for location changes
-                        $location.path('/customers');
+                        $location.path('/products');
                     }, processError);
                 }
             });
         };
 
         function init() {
-            if (customerID > 0) {
-                productsService.getProducts(customerID).then(function (product) {
+            if (productID > 0) {
+                productsService.getProducts(productID).then(function (product) {
                     $scope.product = product;
                 }, processError);
             } else {

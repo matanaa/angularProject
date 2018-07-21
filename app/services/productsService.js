@@ -4,15 +4,15 @@ define(['app'], function (app) {
 
     var productsService = function ($http, $q) {
         var serviceBase = '/api/dataservice/',
-            customers = null,
+            products = null,
             productsFactory = {};
 
         productsFactory.getProducts = function (pageIndex, pageSize) {
             return getPagedResource('products', pageIndex, pageSize);
         };
 
-        productsFactory.getCustomersSummary = function (pageIndex, pageSize) {
-            return getPagedResource('customersSummary', pageIndex, pageSize);
+        productsFactory.getProductsSummary = function (pageIndex, pageSize) {
+            return getPagedResource('productsSummary', pageIndex, pageSize);
         };
 
         productsFactory.getStates = function () {
@@ -41,52 +41,52 @@ define(['app'], function (app) {
             return $q.when({});
         };
 
-        productsFactory.updateCustomer = function (customer) {
-            return $http.put(serviceBase + 'putCustomer/' + customer.id, customer).then(function (status) {
+        productsFactory.updateProduct = function (product) {
+            return $http.put(serviceBase + 'putProduct/' + product.id, product).then(function (status) {
                 return status.data;
             });
         };
 
-        productsFactory.deleteCustomer = function (id) {
-            return $http.delete(serviceBase + 'deleteCustomer/' + id).then(function (status) {
+        productsFactory.deleteProduct = function (id) {
+            return $http.delete(serviceBase + 'deleteProduct/' + id).then(function (status) {
                 return status.data;
             });
         };
 
-        productsFactory.getCustomer = function (id) {
+        productsFactory.getProduct = function (id) {
             //then does not unwrap data so must go through .data property
             //success unwraps data automatically (no need to call .data property)
-            return $http.get(serviceBase + 'customerById/' + id).then(function (results) {
-                extendCustomers([results.data]);
+            return $http.get(serviceBase + 'productById/' + id).then(function (results) {
+                //extendCustomers([results.data]);
                 return results.data;
             });
         };
 
-        function extendCustomers(customers) {
-            var custsLen = customers.length;
-            //Iterate through customers
-            for (var i = 0; i < custsLen; i++) {
-                var cust = customers[i];
-                if (!cust.orders) cust.orders = [];
-
-                var ordersLen = cust.orders.length;
-                for (var j = 0; j < ordersLen; j++) {
-                    var order = cust.orders[j];
-                    order.orderTotal = order.quantity * order.price;
-                }
-                cust.ordersTotal = ordersTotal(cust);
-            }
-        }
+        // function extendProducts(products) {
+        //     var custsLen = products.length;
+        //     //Iterate through products
+        //     for (var i = 0; i < custsLen; i++) {
+        //         var cust = products[i];
+        //         if (!cust.orders) cust.orders = [];
+        //
+        //         var ordersLen = cust.orders.length;
+        //         for (var j = 0; j < ordersLen; j++) {
+        //             var order = cust.orders[j];
+        //             order.orderTotal = order.quantity * order.price;
+        //         }
+        //         cust.ordersTotal = ordersTotal(cust);
+        //     }
+        // }
 
         function getPagedResource(baseResource, pageIndex, pageSize) {
             var resource = baseResource;
             resource += (arguments.length == 3) ? buildPagingUri(pageIndex, pageSize) : '';
             return $http.get(serviceBase + resource).then(function (response) {
-                var custs = response.data;
-                extendCustomers(custs);
+                var products = response.data;
+                //extendCustomers(custs);
                 return {
                     totalRecords: parseInt(response.headers('X-InlineCount')),
-                    results: custs
+                    results: products
                 };
             });
         }
@@ -101,9 +101,9 @@ define(['app'], function (app) {
             return order.quantity * order.price;
         };
 
-        function ordersTotal(customer) {
+        function ordersTotal(product) {
             var total = 0;
-            var orders = customer.orders;
+            var orders = product.orders;
             var count = orders.length;
 
             for (var i = 0; i < count; i++) {

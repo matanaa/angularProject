@@ -36,6 +36,13 @@ module.exports = {
         });
     },
 
+    getProductsSummary: function(callback) {
+        console.log('*** accessDB.getProductsSummary');
+        Product.find({}, {'_id': 0, 'name':1, 'price':1, 'type': 1, 'stock': 1, 'producer': 1, 'id': 1}, function(err, productsSummary) {
+            callback(null, productsSummary);
+        });
+    },
+
 
     // insert a  Product
     insertProduct: function(req_body,  callback) {
@@ -56,7 +63,12 @@ module.exports = {
         });
     },
 
-
+    deleteProduct: function(id, callback) {
+        console.log('*** accessDB.deleteProduct');
+        Product.remove({'id': id}, function(err, product) {
+            callback(null);
+        });
+    },
 
     // get all the branches
     getBranches: function(callback) {

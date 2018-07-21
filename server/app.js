@@ -65,8 +65,10 @@ app.get('/api/dataservice/CheckUnique/:email', api.checkemail);
 app.get('/api/dataservice/Branches', api.branches);
 app.get('/api/dataservice/BranchesSummary', api.branchesSummary);
 
-app.get('/api/dataservice/Products', api.products);
+app.get('/api/dataservice/products', api.products);
+app.get('/api/dataservice/productsSummary', api.productsSummary);
 app.post('/api/dataservice/addProduct', api.addProduct);
+app.delete('/api/dataservice/deleteProduct/:id', api.deleteProduct);
 
 // redirect all others to the index (HTML5 history)
 app.get('*', routes.index);
