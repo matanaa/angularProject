@@ -83,7 +83,7 @@ module.exports = {
     // get the branch summary
     getBranchesSummary: function(callback) {
         console.log('*** accessDB.getBranchesSummary');
-        Branch.find({}, {'_id': 0, 'name':1, 'phone':1, 'openingHours': 1, 'longitude': 1, 'latitude': 1, 'id': 1}, function(err, branchesSummary) {
+        Branch.find({}, {}, function(err, branchesSummary) {
             callback(null, branchesSummary);
         });
     },

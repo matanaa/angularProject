@@ -22,12 +22,18 @@ var BranchSchema = new Schema({
     openingHours : {
         type : String, required: true, trim: true
     },
+    address : {
+        type : String, required: true, trim: true
+    },
+    city : {
+        type : String, required: true, trim: true
+    },
     longitude : {
         type : Number, required: true, trim: true
     },
     latitude : {
-        type : String, required: true, trim: true
-    },
+        type : Number, required: true, trim: true
+    }
 });
 
 BranchSchema.index({ id: 1, type: 1 }); // schema level

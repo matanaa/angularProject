@@ -82,6 +82,53 @@ define(['app', 'services/branchesService'], function (app) {
             getBranchesSummary();
         }
 
+        function initMap() {
+
+            var map = new google.maps.Map(document.getElementById('map_div'), {
+                center: {lat: 31.978140, lng: 34.768034},
+                zoom: 14
+            });
+
+            $scope.branches.map(function (currentBranch) {
+                if(currentBranch.latitude && currentBranch.longitude && currentBranch.name) {
+                    console.log("Lat : ", currentBranch.latitude, "Lon : ", currentBranch.longitude);
+
+                    // Create a marker and set its position.
+                    var marker = new google.maps.Marker({
+                        map: map,
+                        position: {lat: Number.parseFloat(currentBranch.latitude), lng: Number.parseFloat(currentBranch.longitude)},
+                        title: currentBranch.name,
+                        animation: google.maps.Animation.DROP
+                    });
+
+                    // Create a popup balloon.
+                    var contentString = '<div>'+
+                        '<h2>' + currentBranch.name + '</h2>';
+                    if(currentBranch.openingHours) {
+                        contentString += '<p><b>Opening Hours : </b>' + currentBranch.openingHours + '</p>';
+                    }
+                    if(currentBranch.phone) {
+                        contentString += '<p><b>Phone : </b>' + currentBranch.phone + '</p>';
+                    }
+                    if(currentBranch.address) {
+                        contentString += '<p><b>Address : </b>' + currentBranch.address + '</p>';
+                    }
+                    if(currentBranch.city) {
+                        contentString += '<p><b>City : </b>' + currentBranch.city + '</p>';
+                    }
+                    contentString += '</div>';
+
+                    var infowindow = new google.maps.InfoWindow({
+                        content: contentString
+                    });
+
+                    marker.addListener('click', function() {
+                        infowindow.open(map, marker);
+                    });
+                }
+            });
+        }
+
         function createWatches() {
             //Watch searchText value and pass it and the branches to nameCityStateFilter
             //Doing this instead of adding the filter to ng-repeat allows it to only be run once (rather than twice)
@@ -96,6 +143,45 @@ define(['app', 'services/branchesService'], function (app) {
                 .then(function (data) {
                     $scope.totalRecords = data.totalRecords;
                     $scope.branches = data.results;
+
+                    if($scope.branches.length === 0) {
+                        // Default init for branches in case not existed in DB.
+                        $scope.branches = [
+                            {
+                                "_id" : "5b4610305d5c17ddae31c351",
+                                "name" : "Branch Colman",
+                                "phone" : "03-1234567",
+                                "openingHours" : "09:00 - 16:00",
+                                "address" : "Eli Vizel 2 st.",
+                                "city" : "Rishon Lezion",
+                                "latitude" : "31.9697379",
+                                "longitude" : "34.7727873"
+                            },
+                            {
+                                "_id" : "5b4627da21f7e1d7351bb63b",
+                                "name" : "Branch Cinema City",
+                                "phone" : "04-1234567",
+                                "openingHours" : "10:00 - 16:00",
+                                "address" : "Yaldei Teheran 3 st.",
+                                "city" : "Rishon Lezion",
+                                "latitude" : "31.9839871",
+                                "longitude" : "34.7709614"
+                            },
+                            {
+                                "_id" : "5b46284321f7e1d7351bb63c",
+                                "name" : "Branch Yes Planet",
+                                "phone" : "05-1234567",
+                                "openingHours" : "11:00 - 16:00",
+                                "address" : "Hamea Veesrim 4 st.",
+                                "city" : "Rishon Lezion",
+                                "latitude" : "31.9796641",
+                                "longitude" : "34.7475896"
+                            }
+                        ];
+                    }
+
+                    initMap();
+
                     filterBranches(''); //Trigger initial filter
                 }, function (error) {
                     alert(error.message);

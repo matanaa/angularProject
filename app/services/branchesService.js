@@ -84,7 +84,7 @@ define(['app'], function (app) {
             return $http.get(serviceBase + resource).then(function (response) {
                 var custs = response.data;
                 return {
-                    totalRecords: 1,
+                    totalRecords: custs.length,
                     results: custs
                 };
             });
