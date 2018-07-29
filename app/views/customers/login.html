@@ -1,0 +1,53 @@
+﻿<div class="view">
+    <div class="container">
+        <header>
+            <h3>{{title}} Login</h3>
+        </header>
+        <form name="editForm" novalidate>
+
+                <div class="row">
+                    <div class="span2">
+                        Email:
+                    </div>
+                    <div class="span10">
+                        <!-- type="email" causing a problem with Breeze so using regex -->
+                        <input type="text" name="email"
+                            data-ng-model="customer.email" 
+                            required />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="span2">
+                        password:
+                    </div>
+                    <div class="span10">
+                        <input type="password" name="password" data-ng-model="customer.password" required />
+                        <span class="errorMessage" ng-show="editForm.password.$dirty && editForm.password.$invalid">
+                            Password is required
+                        </span>
+                    </div>
+                </div>
+
+
+
+                <div class="row">
+                    <div class="span12">
+                        <button type="submit" class="btn btn-primary" data-ng-click="doLogin()" ng-disabled="editForm.$invalid || !editForm.$dirty">{{buttonText}}</button>
+                        &nbsp;&nbsp;
+                        <button class="btn btn-danger" data-ng-if="customer.id > 0" data-ng-click="deleteCustomer()">Delete</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <br />
+                    <div class="span10 label label-success show-hide-animation" data-ng-show="updateStatus">
+                        <i class="icon-thumbs-up icon-white"></i>&nbsp;&nbsp;Welcome !!!
+                    </div>
+                    <div class="span10 label label-important show-hide-animation" data-ng-show="errorMessage">
+                        <i class="icon-thumbs-down icon-white"></i>&nbsp;&nbsp;Error: {{ errorMessage }}
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

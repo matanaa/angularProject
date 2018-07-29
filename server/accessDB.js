@@ -199,7 +199,9 @@ module.exports = {
 
                 const payload = {
                     admin: user.isAdmin,
-                    user: user.firstName+ " "+user.lastName
+                    user: user.firstName+ " "+user.lastName,
+                    id: user.id
+
                 };
                 var token = jwt.sign(payload, "mamamama", {
                    // expiresInMinutes: 1440 // expires in 24 hours

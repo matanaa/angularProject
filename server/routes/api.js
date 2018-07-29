@@ -213,7 +213,8 @@ exports.authenticate = function (req, res) {
     db.authenticate(req.body.email,req.body.password, function(err, token) {
         if (err) {
             console.log('*** login err');
-            res.json({'status': false});
+            res.status(401).json(false);
+            //res.status(401).json({'status': false});
         } else {
             console.log('*** login ok');
             res.json({'status': true,

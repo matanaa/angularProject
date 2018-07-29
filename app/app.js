@@ -30,6 +30,8 @@ define(['services/routeResolver'], function () {
                 //The second parameter allows for putting related controllers/views into subfolders to better organize large projects
                 //Thanks to Ton Yeung for the idea and contribution
                 .when('/customers', route.resolve('Customers', 'customers/'))
+                .when('/login', route.resolve('login', 'customers/'))
+
                 .when('/customerorders/:customerID', route.resolve('CustomerOrders', 'customers/'))
                 .when('/customeredit/:customerID', route.resolve('CustomerEdit', 'customers/'))
                 .when('/orders', route.resolve('Orders', 'orders/'))
