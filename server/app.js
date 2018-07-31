@@ -87,6 +87,7 @@ app.get('/api/dataservice/BranchesSummary', api.branchesSummary);
 
 app.get('/api/dataservice/products', api.products);
 app.get('/api/dataservice/productsSummary', api.productsSummary);
+app.get('/api/dataservice/productById/:id', api.product);
 app.post('/api/dataservice/addProduct', api.addProduct);
 app.delete('/api/dataservice/DeleteProduct/:id', api.deleteProduct);
 

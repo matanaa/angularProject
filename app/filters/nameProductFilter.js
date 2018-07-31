@@ -4,30 +4,18 @@ define(['app'], function (app) {
 
     var nameProductFilter = function () {
 
-        function matchesProduct(customer, filterValue) {
-            if (customer.orders) {
-                for (var i = 0; i < customer.orders.length; i++) {
-                    if (customer.orders[i].product.toLowerCase().indexOf(filterValue) > -1) {
-                        return true;
-                    }
-                }
-                return false;
-            }
-
-            return true;
-        }
-
-        return function (products, filterValue) {
-            if (!filterValue || !products) return products;
+        return function (product, filterValue) {
+            if (!filterValue) return product;
 
             var matches = [];
             filterValue = filterValue.toLowerCase();
-            for (var i = 0; i < products.length; i++) {
-                var product = products[i];
-                if (product.name.toLowerCase().indexOf(filterValue) > -1 ){// ||
-                    //matchesProduct(product, filterValue)) {
+            for (var i = 0; i < product.length; i++) {
+                var cust = product[i];
+                if (cust.Name.toLowerCase().indexOf(filterValue) > -1 ||
+                    cust.type.toLowerCase().indexOf(filterValue) > -1 ||
+                    cust.producer.toLowerCase().indexOf(filterValue) > -1 ) {
 
-                    matches.push(product);
+                    matches.push(cust);
 
                 }
             }

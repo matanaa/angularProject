@@ -19,13 +19,13 @@ define(['app', 'services/productsService'], function (app) {
 
 
         $scope.saveProduct = function () {
-            console.log("here");
+
             if ($scope.editForm.$valid) {
                 if (!$scope.product.id) {
                     productsService.insertProduct($scope.product).then(processSuccess, processError);
                 }
                 else {
-                    productsService.updateCustomer($scope.product).then(processSuccess, processError);
+                    productsService.updateProduct($scope.product).then(processSuccess, processError);
                 }
             }
         };
@@ -51,7 +51,7 @@ define(['app', 'services/productsService'], function (app) {
 
         function init() {
             if (productID > 0) {
-                productsService.getProducts(productID).then(function (product) {
+                productsService.getProduct(productID).then(function (product) {
                     $scope.product = product;
                 }, processError);
             } else {
@@ -92,11 +92,6 @@ define(['app', 'services/productsService'], function (app) {
             return;
         }
 
-        function getStates() {
-            productsService.getStates().then(function (states) {
-                $scope.states = states;
-            }, processError);
-        }
 
         function processSuccess() {
             $scope.editForm.$dirty = false;

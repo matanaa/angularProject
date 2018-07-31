@@ -19,6 +19,25 @@ exports.products = function (req, res) {
     });
 };
 
+exports.product = function (req, res) {
+    console.log('*** products');
+
+    db.getProduct(req.params.id,function(err, product) {
+        if (err) {
+            console.log('*** product err');
+            res.json({
+                product: product
+            });
+        } else {
+            console.log('*** product ok');
+
+            res.json(product);
+        }
+    });
+};
+
+
+
 
 exports.addProduct = function (req, res) {
     console.log('*** addProduct');
@@ -168,7 +187,7 @@ exports.addCustomer = function (req, res) {
 
 };
 
- exports.editCustomer = function (req, res) {
+exports.editCustomer = function (req, res) {
   console.log('*** editCustomer');
 
   db.getState(req.body.stateId, function(err, state) {
@@ -205,8 +224,6 @@ exports.deleteCustomer = function (req, res) {
 };
 
 
-
-
 exports.authenticate = function (req, res) {
     console.log('*** authenticate');
 
@@ -223,8 +240,6 @@ exports.authenticate = function (req, res) {
         }
     });
 };
-
-
 
 // GET
 exports.states = function (req, res) {

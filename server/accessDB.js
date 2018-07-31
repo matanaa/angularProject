@@ -38,9 +38,19 @@ module.exports = {
         });
     },
 
+    // get a  customer
+    getProduct: function(id, callback) {
+        console.log('*** accessDB.getProduct');
+        Product.findOne({'id': id}, {}, function(err, product) {
+            callback(null, product);
+        });
+    },
+
+
     getProductsSummary: function(callback) {
         console.log('*** accessDB.getProductsSummary');
-        Product.find({}, {'_id': 0, 'name':1, 'price':1, 'type': 1, 'stock': 1, 'producer': 1, 'id': 1}, function(err, productsSummary) {
+        Product.find({}, function(err, productsSummary) {
+
             callback(null, productsSummary);
         });
     },
