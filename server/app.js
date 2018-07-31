@@ -12,6 +12,8 @@ var express = require('express')
 //var app = module.exports = express();
 var app = express();
 var DB = require('./accessDB');
+var cookieParser = require('cookie-parser');
+app.use(cookieParser());
 
 // Configuration
 app.use(protectJSON);
@@ -57,14 +59,16 @@ function csrf(req, res, next) {
 //     app.use(loginCheck);
 // });
 //app.get('/', routes.index);
+app.get('/', routes.index);
 
 
 // JSON API
 var router = express.Router();
 var products = require('./routes/product')(router);
 app.use('/api/products', products);
-
+app.post('/api/dataservice/login', api.authenticate);
 app.get('/api/dataservice/Customers', api.customers);
+app.use(loginCheck);
 
 app.get('/api/dataservice/Customer/:id', api.customer);
 app.post('/api/dataservice/PostCustomer', api.addCustomer);
@@ -76,8 +80,7 @@ app.get('/api/dataservice/States', api.states);
 app.get('/api/dataservice/CustomersSummary', api.customersSummary);
 app.get('/api/dataservice/CustomerById/:id', api.customer);
 app.get('/api/dataservice/CheckUnique/:email', api.checkemail);
-app.post('/api/dataservice/login', api.authenticate);
-//app.use(loginCheck);
+
 
 app.get('/api/dataservice/Branches', api.branches);
 app.get('/api/dataservice/BranchesSummary', api.branchesSummary);

@@ -1,9 +1,12 @@
+var jwt= require('jsonwebtoken'); // used to create, sign, and verify tokens
+
 module.exports =function(req, res, next) {
 
     // check header or url parameters or post parameters for token
     var token="";
     try {
-        token = req.body.token || req.query.token || req.headers['x-access-token'];
+
+        token = req.cookies['token'] ||req.body.token || req.query.token || req.headers['x-access-token']||req.headers['Authorization'];
 
     }catch (e) {
         token=false;

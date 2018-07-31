@@ -41,7 +41,7 @@ define(['app'], function (app) {
         customersFactory.login = function (customer) {
             return $http.post(serviceBase + 'login', customer).then(function (results) {
                console.log(results)
-                return results.data;
+                return results;
             });
         };
         customersFactory.newCustomer = function () {

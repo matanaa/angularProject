@@ -39,7 +39,8 @@ define(['services/routeResolver'], function () {
                 .when('/products', route.resolve('products', 'products/'))
                 .when('/productedit/:customerID', route.resolve('productEdit', 'products/'))
                 .when('/branches', route.resolve('branches', 'branches/'))
-                .otherwise({ redirectTo: '/customers' });
+                .otherwise({ redirectTo: '/login' });
+               // .otherwise({ redirectTo: '/customers' });
 
     }]);
 

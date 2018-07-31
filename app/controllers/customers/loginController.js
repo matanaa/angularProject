@@ -1,9 +1,7 @@
 ﻿'use strict';
 
 define(['app'], function (app) {
-
-    var loginController = function ($rootScope, $scope, $location, $routeParams, $timeout, config, dataService, modalService) {
-
+    var loginController = function ($rootScope, $scope, $location, $routeParams,$http, $timeout, config, dataService, modalService) {
         $scope.customer;
         $scope.states = [];
         $scope.title = "system";
@@ -19,7 +17,26 @@ define(['app'], function (app) {
 
         $scope.doLogin = function () {
             if ($scope.editForm.$valid) {
-                dataService.login($scope.customer).then(processSuccess, processError);
+                dataService.login($scope.customer).then(function (res) {
+                    if (res.status ==200 )
+
+                    {
+                        window.localStorage.setItem('token', res.data.token);
+                        document.cookie = "token="+res.data.token;
+
+                        $http.defaults.headers.common.Authorization = res.data.token;
+                        console.log("login");
+                        processSuccess()
+
+                    }
+                else{
+                        console.log("not login");
+                        console.log(res);
+                        processError("User/Password incorrect");
+                    }
+
+                });
+
                     //dataService.insertCustomer($scope.customer).then(processSuccess, processError);
             }
         };
@@ -67,7 +84,7 @@ define(['app'], function (app) {
         }
 
         function processError(error) {
-            $scope.errorMessage = error.message;
+            $scope.errorMessage = error;
             startTimer();
         }
 
@@ -81,6 +98,6 @@ define(['app'], function (app) {
     };
 
     app.register.controller('loginController',
-       ['$rootScope', '$scope', '$location', '$routeParams', '$timeout', 'config', 'dataService', 'modalService', loginController]);
+       ['$rootScope', '$scope', '$location', '$routeParams', '$http','$timeout', 'config', 'dataService', 'modalService', loginController]);
 
 });
