@@ -3,7 +3,7 @@
         <header>
             <h3>{{title}} product</h3>
         </header>
-        <form name="editForm" novalidate>
+        <form name="editForm" enctype="multipart/form-data" novalidate >
             <div>
                 <div class="row">
                     <div class="span12">
@@ -79,7 +79,9 @@
                         Images:
                     </div>
                     <div class="span10">
-                        <input type="text" data-ng-model="product.images" required />
+                            <input type="file" data-ng-model="product.images" required />
+
+
                         <span class="errorMessage" ng-show="editForm.images.$dirty && editForm.images.$invalid">
                             Images is required
                         </span>
@@ -92,7 +94,7 @@
                     <div class="span12">
                         <button type="submit" class="btn btn-primary" data-ng-click="saveProduct()" ng-disabled="editForm.$invalid || !editForm.$dirty">{{buttonText}}</button>
                         &nbsp;&nbsp;
-                        <button class="btn btn-danger" data-ng-if="customer.id > 0" data-ng-click="deleteCustomer()">Delete</button>
+                        <button class="btn btn-danger" data-ng-if="product.id > 0" data-ng-click="deleteProduct()">Delete</button>
                     </div>
                 </div>
                 <div class="row">

@@ -1,0 +1,90 @@
+﻿<div class="view">
+    <div class="container">
+        <header>
+            <h2>Buy Now !!!</h2>
+        </header>
+            <div>
+                <div class="row">
+                    <div class="span12 text-center">
+                        <h2>{{ product.Name}} <!--(<a style="font-size:12pt" href="#/customerorders/{{customer.id}}">View Orders</a>)--></h2>
+                        <br />
+                    </div>
+                </div>
+
+
+
+                <div class="row">
+                    <div class="span2">
+                        Type:
+                    </div>
+                    <div class="span10">
+                        <p class="mb-0">{{product.type}} </p>
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="span2">
+                        Price:
+                    </div>
+                    <div class="span10">
+                        <p class="mb-0">{{product.price}} </p>
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="span2">
+                        stock:
+                    </div>
+                    <div class="span10">
+
+                        <p class="mb-0">{{product.stock}} </p>
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="span2">
+                        Producer:
+                    </div>
+                    <div class="span10">
+
+                        <p class="mb-0">{{product.producer}} </p>
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="span2">
+                        Images:
+                    </div>
+                    <div class="span10">
+
+                        <p class="mb-0">{{product.images}} </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="row">
+                    <div class="span12">
+                        <form name="editForm" enctype="multipart/form-data" novalidate >
+
+                        <button type="submit" class="btn btn-primary" data-ng-click="buyProduct()" ng-disabled="editForm.$invalid || !editForm.$dirty">{{buttonText}}</button>
+                        &nbsp;&nbsp;</div>
+                </div>
+                <div class="row">
+                    <br />
+                    <div class="span10 label label-success show-hide-animation" data-ng-show="updateStatus">
+                        <i class="icon-thumbs-up icon-white"></i>&nbsp;&nbsp;Customer updated!
+                    </div>
+                    <div class="span10 label label-important show-hide-animation" data-ng-show="errorMessage">
+                        <i class="icon-thumbs-down icon-white"></i>&nbsp;&nbsp;Error: {{ errorMessage }}
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
