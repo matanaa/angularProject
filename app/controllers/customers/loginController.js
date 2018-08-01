@@ -23,15 +23,13 @@ define(['app'], function (app) {
                     {
                         window.localStorage.setItem('token', res.data.token);
                         document.cookie = "token="+res.data.token;
+                        document.cookie = "isAdmin="+res.data.isAdmin;
 
                         $http.defaults.headers.common.Authorization = res.data.token;
-                        console.log("login");
                         processSuccess()
 
                     }
                 else{
-                        console.log("not login");
-                        console.log(res);
                         processError("User/Password incorrect");
                     }
 
@@ -78,7 +76,7 @@ define(['app'], function (app) {
         function processSuccess() {
             $scope.editForm.$dirty = false;
             $scope.updateStatus = true;
-            $scope.title = 'Wellcome';
+            $scope.title = 'Welcome';
             $scope.buttonText = 'Login';
             startTimer();
         }

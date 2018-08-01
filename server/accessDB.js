@@ -216,8 +216,20 @@ module.exports = {
                 var token = jwt.sign(payload, "mamamama", {
                    // expiresInMinutes: 1440 // expires in 24 hours
                 });
+
+                if ( typeof user.isAdmin  === 'undefined'){
+                    user.isAdmin=false;
+                }
+                const retVal = {
+                    admin: user.isAdmin,
+                    user: user.firstName+ " "+user.lastName,
+                    token : token,
+                    id: user.id
+
+
+                };
                 console.log('*** accessDB.authenticate:customer send token');
-                callback(null, token);
+                callback(null, retVal);
 
             }
 

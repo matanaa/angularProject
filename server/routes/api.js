@@ -235,7 +235,8 @@ exports.authenticate = function (req, res) {
         } else {
             console.log('*** login ok');
             res.json({'status': true,
-                'token' : token
+                'token' : token.token,
+                'isAdmin' : token.admin,
             });
         }
     });
