@@ -127,7 +127,7 @@ module.exports = {
     getCustomer: function(id, callback) {
         console.log('*** accessDB.getCustomer');
         Customer.find({'id': id}, {}, function(err, customer) {
-            callback(null, customer);
+            callback(null, customer[0]);
         });
     },
 
@@ -163,7 +163,7 @@ module.exports = {
 
         var s = {'id': state[0].id, 'abbreviation': state[0].abbreviation, 'name': state[0].name}
 
-        Customer.findOne({'id': id}, {'_id': 1, 'firstName':1, 'lastName':1, 'city': 1, 'state': 1, 'stateId': 1, 'gender': 1, 'id': 1}, function(err, customer) {
+        Customer.find({'id': id}, {'_id': 1, 'firstName':1, 'lastName':1, 'city': 1, 'state': 1, 'stateId': 1, 'gender': 1, 'id': 1}, function(err, customer) {
             if (err) { return callback(err); }
 
             customer.firstName = req_body.firstName || customer.firstName;

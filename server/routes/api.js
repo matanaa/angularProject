@@ -245,7 +245,7 @@ exports.authenticate = function (req, res) {
 // GET
 exports.states = function (req, res) {
   console.log('*** states');
-    res.json({});
+
     //TODO: delete all calls to this function
     res.json({});
 

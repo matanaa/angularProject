@@ -4,6 +4,11 @@ define(['services/routeResolver'], function () {
 
     var app = angular.module('customersApp', ['ngRoute', 'ngAnimate', 'routeResolverServices', 'wc.Directives', 'wc.Animations', 'ui.bootstrap']);
 
+
+
+
+
+
     app.config(['$routeProvider', 'routeResolverProvider', '$controllerProvider', '$compileProvider', '$filterProvider', '$provide', '$httpProvider',
         function ($routeProvider, routeResolverProvider, $controllerProvider, $compileProvider, $filterProvider, $provide, $httpProvider) {
 
@@ -18,6 +23,7 @@ define(['services/routeResolver'], function () {
                 factory: $provide.factory,
                 service: $provide.service
             };
+
 
             //Define routes - controllers will be loaded dynamically
             var route = routeResolverProvider.route;
