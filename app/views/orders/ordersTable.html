@@ -1,11 +1,11 @@
 ﻿<table class="table table-hover table-striped table-condensed table-bordered ordersTable" data-ng-controller="OrderChildController">
     <thead>
         <tr>
+            <th data-ng-click="setOrder('dateTime')">Date</th>
             <th data-ng-click="setOrder('product')">Product</th>
-            <th data-ng-click="setOrder('date')">Date</th>
-            <th data-ng-click="setOrder('quantity')">Quantity</th>
-            <th data-ng-click="setOrder('price')">Unit Price</th>
-            <th data-ng-click="setOrder('orderTotal')">Total</th>
+            <th data-ng-click="setOrder('amount')">Amount</th>
+            <th data-ng-click="setOrder('price')">Price</th>
+            <th data-ng-click="setOrder('total')">Total</th>
         </tr>
     </thead>
     <tbody>
@@ -16,19 +16,19 @@
         </tr>
         <tr data-ng-repeat="order in customer.orders | orderBy:orderby:reverse" class="repeat-animation">
             <td>
+                {{ order.dateTime | date:'dd/MM/yyyy hh:mm' }}
+            </td>
+            <td>
                 {{ order.product }}
             </td>
             <td>
-                {{ order.date | date:'MM/dd/yyyy' }}
-            </td>
-            <td>
-                {{ order.quantity }}
+                {{ order.amount }}
             </td>
             <td>
                 {{ order.price | currency }}
             </td>
             <td>
-                {{ order.orderTotal | currency }}
+                {{ order.total | currency }}
             </td>
         </tr>
         <tr class="info">
@@ -36,7 +36,7 @@
                 &nbsp;
             </td>
             <td>
-                <strong>{{ customer.ordersTotal | currency }}</strong>
+                <strong>{{ ordersTotal | currency }}</strong>
             </td>
         </tr>
     </tbody>

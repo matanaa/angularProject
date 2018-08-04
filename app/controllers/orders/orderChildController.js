@@ -19,7 +19,7 @@ define(['app'], function (app) {
                 var total = 0.00;
                 for (var i = 0; i < $scope.customer.orders.length; i++) {
                     var order = $scope.customer.orders[i];
-                    total += order.orderTotal;
+                    total += order.total;
                 }
                 $scope.ordersTotal = total;
             }
