@@ -21,9 +21,9 @@ define(['app'], function (app) {
                     if (res.status ==200 )
 
                     {
-                        window.localStorage.setItem('token', res.data.token);
                         document.cookie = "token="+res.data.token;
                         document.cookie = "isAdmin="+res.data.isAdmin;
+                        ocument.cookie = "userId="+res.data.id;
 
                         $http.defaults.headers.common.Authorization = res.data.token;
                         processSuccess()
@@ -39,6 +39,21 @@ define(['app'], function (app) {
             }
         };
 
+        $scope.doLogout = function () {
+
+                //dataService.logout();
+                delete_cookie("token");
+                delete_cookie("isAdmin");
+                delete_cookie("userId");
+
+        };
+
+
+
+        function delete_cookie( name ) {
+            document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+        }
+
         function init() {
                 dataService.newCustomer().then(function (customer) {
                     $scope.customer = customer;
@@ -46,7 +61,7 @@ define(['app'], function (app) {
             //Make sure they're warned if they made a change but didn't save it
             //Call to $on returns a "deregistration" function that can be called to
             //remove the listener (see routeChange() for an example of using it)
-            onRouteChangeOff = $rootScope.$on('$locationChangeStart', routeChange);
+            //onRouteChangeOff = $rootScope.$on('$locationChangeStart', routeChange);
         }
 
         function routeChange(event, newUrl) {

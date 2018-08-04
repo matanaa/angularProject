@@ -13,25 +13,30 @@ var express = require('express')
 var app = express();
 var DB = require('./accessDB');
 var cookieParser = require('cookie-parser');
+var session = require('express-session');
+var bodyParser = require('body-parser');
+var methodOverride = require('method-override')
+var errorHandler = require('errorhandler')
+app.use(methodOverride());
+app.use(bodyParser());
 app.use(cookieParser());
-
-// Configuration
 app.use(protectJSON);
+app.use(session({secret: 'gopalapuram'})); //*
+// Configuration
+
 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
-var session = require('express-session');
 
-app.use(session({secret: 'gopalapuram'})); //*
-var bodyParser = require('body-parser');
-app.use(bodyParser());
-var methodOverride = require('method-override')
-app.use(methodOverride());
+
+
+
+
 app.use(express.static(__dirname + '/../'));
 //app.use(app.router);
 
 
-var errorHandler = require('errorhandler')
+
 
 
 var conn = 'mongodb://localhost/shop';
@@ -68,19 +73,8 @@ var products = require('./routes/product')(router);
 app.use('/api/products', products);
 app.post('/api/dataservice/login', api.authenticate);
 app.get('/api/dataservice/Customers', api.customers);
-app.use(loginCheck);
-
-app.get('/api/dataservice/Customer/:id', api.customer);
 app.post('/api/dataservice/PostCustomer', api.addCustomer);
-app.put('/api/dataservice/PutCustomer/:id', api.editCustomer);
-app.delete('/api/dataservice/DeleteCustomer/:id', api.deleteCustomer);
-
-app.get('/api/dataservice/States', api.states);
-
-app.get('/api/dataservice/CustomersSummary', api.customersSummary);
-app.get('/api/dataservice/CustomerById/:id', api.customer);
 app.get('/api/dataservice/CheckUnique/:email', api.checkemail);
-
 
 app.get('/api/dataservice/Branches', api.branches);
 app.get('/api/dataservice/BranchesSummary', api.branchesSummary);
@@ -88,6 +82,23 @@ app.get('/api/dataservice/BranchesSummary', api.branchesSummary);
 app.get('/api/dataservice/products', api.products);
 app.get('/api/dataservice/productsSummary', api.productsSummary);
 app.get('/api/dataservice/productById/:id', api.product);
+
+app.use(loginCheck);
+
+app.get('/api/dataservice/Customer/:id', api.customer);
+app.put('/api/dataservice/PutCustomer/:id', api.editCustomer);
+app.delete('/api/dataservice/DeleteCustomer/:id', api.deleteCustomer);
+
+app.get('/api/dataservice/States', api.states);
+
+app.get('/api/dataservice/CustomersSummary', api.customersSummary);
+app.get('/api/dataservice/CustomerById/:id', api.customer);
+
+
+
+
+
+
 app.post('/api/dataservice/addProduct', api.addProduct);
 app.delete('/api/dataservice/DeleteProduct/:id', api.deleteProduct);
 
