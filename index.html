@@ -27,6 +27,8 @@
                     <li data-ng-if="checkAdmin()" data-ng-class="{'active':highlight('/customers')}"><a href="#/customers">Customers</a></li>
                     <li data-ng-if="checkAdmin()" data-ng-class="{'active':highlight('/orders')}"><a href="#/orders">Orders</a></li>
                     <li data-ng-class="{'active':highlight('/branches')}"><a href="#/branches">Branches</a></li>
+                  <!--  <li  data-ng-class="{'active':highlight('/logout')}"><a href="#/" data-ng-controller="loginController" data-ng-click="doLogout()" >logout</a></li>-->
+
 
                     <li data-ng-class="{'active':highlight('/about')}"><a href="#/about">About</a></li>
                 </ul>
@@ -43,9 +45,28 @@
                     <footer>
                         <div class="row">
                             <div class="span12">
-                                Created by <a href="http://twitter.com/DanWahlin" target="_blank">Dan Wahlin</a>
+                                <div style="width:100px;height:100px">
+                                    <a href="http://www.accuweather.com/en/il/tel-aviv/215854/weather-forecast/215854"
+                                       class="aw-widget-legal">
+                                    </a>
+                                    <div id="awcc1477324979360"
+                                         class="aw-widget-current"
+                                         data-locationkey="215854"
+                                         data-unit="c"
+                                         data-language="en-us"
+                                         data-useip="false"
+                                         data-uid="awcc1477324979360"></div>
+                                    <script type="text/javascript" src="http://oap.accuweather.com/launch.js">
+                                    </script>
+                                    <canvas id="cvs" width="500" height="100">
+                                        Your browser does not support the HTML 5 Canvas.
+                                    </canvas>
+                                </div>
+
+                               <!-- Created by <a href="http://twitter.com/DanWahlin" target="_blank">Dan Wahlin</a>-->
                             </div>
                         </div>
+
                    </footer>
                 </div>
             </div>
@@ -75,11 +96,28 @@
 
     <div id="fb-root"></div>
     <script>
-        (function(d, s, id) {
+        (function (d, s, id) {
             var js, fjs = d.getElementsByTagName(s)[0];
             if (d.getElementById(id)) return;
             js = d.createElement(s); js.id = id;
             js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.10&appId=1573737326011353";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>*@
+    <script>
+        window.fbAsyncInit = function() {
+            FB.init({
+                appId      : '1573737326011353',
+                xfbml      : true,
+                version    : 'v2.10'
+            });
+            FB.AppEvents.logPageView();
+        };
+
+        (function(d, s, id){
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {return;}
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js";
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));</script>
 
