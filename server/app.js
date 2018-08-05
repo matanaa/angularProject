@@ -90,6 +90,7 @@ app.get('/api/dataservice/productsSummary', api.productsSummary);
 app.get('/api/dataservice/productById/:id', api.product);
 app.post('/api/dataservice/addProduct', api.addProduct);
 app.delete('/api/dataservice/DeleteProduct/:id', api.deleteProduct);
+app.get('/api/dataservice/buyProduct/:id', api.addOrderToCustomer);
 
 // redirect all others to the index (HTML5 history)
 app.get('*', routes.index);
