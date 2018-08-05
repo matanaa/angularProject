@@ -37,6 +37,12 @@ define(['app'], function (app) {
             });
         };
 
+        productsFactory.addToCustomer = function(product){
+            return $http.get(serviceBase + "buyProduct/"+ product.id).then(function (status) {
+                return status.data;
+            })
+        }
+
         productsFactory.newProduct = function () {
             return $q.when({});
         };

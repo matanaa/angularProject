@@ -20,7 +20,7 @@ var imagesSchema = new Schema({
 
 
 var ProductSchema = new Schema({
-  Name : {
+  name : {
     type : String, required: true, trim: true
   },
     id : {

@@ -14,21 +14,24 @@ var SettingsSchema = new Schema({
 
 
 var OrderSchema = new Schema({
-    products : {
-        type : Array, required: true, trim: true
+    product : {
+        type : String, required: false, trim: true
     },
 
-    donePayment : {
-        type : Boolean,
-    } ,
-    shipmentAddress : {
-        type : String,
+    dateTime : {
+        type : String
     },
-    doneShipment : {
-        type : Boolean,
-    },
+
     price : {
-        type : Number,
+        type : Number
+    },
+
+    amount : {
+        type: Number
+    },
+
+    total : {
+        type : Number
     }
 });
 
@@ -64,7 +67,9 @@ var CustomerSchema = new Schema({
   isAdmin : {
       type : Boolean,
   },
-  orders: [OrderSchema],
+  orders: {
+      type : [OrderSchema],
+  }
 });
 
 CustomerSchema.index({ id: 1, type: 1 }); // schema level
@@ -87,4 +92,6 @@ CustomerSchema.pre('save', function(next) {
 });
 
 exports.CustomerSchema = CustomerSchema;
+// exports.OrderSchema = OrderSchema;
 module.exports = mongoose.model('Users', CustomerSchema);
+// module.exports = mongoose.model('orders', OrderSchema);

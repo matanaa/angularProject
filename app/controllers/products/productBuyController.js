@@ -30,6 +30,21 @@ define(['app', 'services/productsService'], function (app) {
             }
         };
 
+
+        $scope.buyProduct = function () {
+
+            if ($scope.editForm.$valid) {
+                if ($scope.product) {
+
+                    productsService.addToCustomer($scope.product).then(processSuccess, processError);
+                }
+            }
+        };
+
+
+
+
+
         $scope.deleteProduct = function () {
             var productName = $scope.product.name;
             var modalOptions = {
@@ -114,6 +129,7 @@ define(['app', 'services/productsService'], function (app) {
             }, 3000);
         }
     };
+
 
     app.register.controller('productBuyController',
        ['$rootScope', '$scope', '$location', '$routeParams', '$timeout', 'config', 'productsService', 'modalService', productsController]);

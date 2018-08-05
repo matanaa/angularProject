@@ -78,7 +78,7 @@ define(['app'], function (app) {
                 var ordersLen = cust.orders.length;
                 for (var j = 0; j < ordersLen; j++) {
                     var order = cust.orders[j];
-                    order.orderTotal = order.quantity * order.price;
+                    order.orderTotal = order.amount * order.price;
                 }
                 cust.ordersTotal = ordersTotal(cust);
             }

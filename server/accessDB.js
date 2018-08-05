@@ -194,7 +194,37 @@ module.exports = {
         });
     },
 
+    addOrderToCustomer: function(prod_id, cust_id, callback){
+        console.log('*** accessDB.addOrderToCustomer');
+        Customer.findOne({'id': cust_id}, function(err, user) {
+            if (err || user==null) { console.log('*** accessDB.addOrderToCustomer:customer not found ' + err);
+                callback("customer not found ",null); }
+            else
+            {
+                Product.findOne({'id': prod_id}, function(error, product) {
+                    if (err || product==null) { console.log('*** accessDB.addOrderToCustomer:product not found ' + err);
+                        callback("product not found ",null); }
+                    else
+                    {
+                        var amnt = 1;
+                        var date = new Date()
+                        //ord = {'product': product.name, 'price': product.price};
+                        user.orders.push({'dateTime': date.toDateString(),
+                            'product': product.name ,
+                            'price': product.price,
+                            'amount': amnt,
+                            'total': product.price*amnt});
 
+                        user.save(function(err) {
+                            if (err) { console.log('*** accessDB.addOrderToCustomer err: ' + err); return callback(err); }
+
+                            callback(null);
+                        });
+                    }
+                })
+            }
+        });
+    },
 
 
     authenticate: function(email,password, callback){
@@ -224,7 +254,7 @@ module.exports = {
                     admin: user.isAdmin,
                     user: user.firstName+ " "+user.lastName,
                     token : token,
-                    id: user.id
+                    userid: user.id
 
 
                 };

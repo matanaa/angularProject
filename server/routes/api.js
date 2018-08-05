@@ -209,6 +209,26 @@ exports.editCustomer = function (req, res) {
   });
 };
 
+exports.addOrderToCustomer = function (req, res) {
+    console.log('*** addOrderToCustomer');
+
+
+
+            db.addOrderToCustomer(req.params.id, req.cookies['userid'], function(err) {
+                if (err) {
+                    console.log('*** addOrderToCustomer err' + util.inspect(err));
+                    res.json({'status': false});
+                } else {
+                    console.log('*** addOrderToCustomer ok');
+
+                    res.json({'status': true});
+                }
+            });
+
+
+};
+
+
 exports.deleteCustomer = function (req, res) {
   console.log('*** deleteCustomer');
 
@@ -237,6 +257,7 @@ exports.authenticate = function (req, res) {
             res.json({'status': true,
                 'token' : token.token,
                 'isAdmin' : token.admin,
+                'userid' : token.userid
             });
         }
     });
