@@ -13,7 +13,9 @@
                             <li class="toolbaritem"><a data-ng-click="navigate('/productedit/0')"><i class="icon-plus"></i> Add Product</a></li>
                         </ul>
                         <form class="navbar-form pull-right">
-                            <span class="navbarText">Filter:</span>&nbsp;&nbsp;<input type="text" data-ng-model="searchText" class="novalidate" />
+                            <span class="navbarText">Name:</span>&nbsp;&nbsp;<input type="text" data-ng-model="filterName" class="novalidate" />
+                            <span class="navbarText">Type:</span>&nbsp;&nbsp;<input type="text" data-ng-model="filterType" class="novalidate" />
+                            <span class="navbarText">Producer:</span>&nbsp;&nbsp;<input type="text" data-ng-model="filterProducer" class="novalidate" />
                         </form>
                     </div>
                 </div>
@@ -25,8 +27,8 @@
                 <div class="span4 card card-animation"
                      data-ng-repeat="product in filteredProducts">
                     <button data-ng-if="checkAdmin()" class="btn close cardClose" title="Delete Product" data-ng-click="deleteProduct(product.id)">&times;</button>
-                    <div data-ng-if="checkAdmin()" class="cardHeader"><a href="#/productedit/{{product.id}}" class="white"><b>{{product.Name}}</b> - {{product.producer}} <i class="icon-edit icon-white editIcon"></i></a></div>
-                    <div data-ng-if="!checkAdmin()"class="cardHeader"><a href="#/productBuy/{{product.id}}" class="white"><b>{{product.Name}}</b> - {{product.producer}} <i class="icon-adjust icon-white editIcon"></i></a></div>
+                    <div data-ng-if="checkAdmin()" class="cardHeader"><a href="#/productedit/{{product.id}}" class="white"><b>{{product.name}}</b> - {{product.producer}} <i class="icon-edit icon-white editIcon"></i></a></div>
+                    <div data-ng-if="!checkAdmin()"class="cardHeader"><a href="#/productBuy/{{product.id}}" class="white"><b>{{product.name}}</b> - {{product.producer}} <i class="icon-adjust icon-white editIcon"></i></a></div>
                     <div class="cardBody">
                         <div class="clearfix">
                             <div class="pull-left">

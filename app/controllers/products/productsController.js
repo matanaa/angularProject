@@ -42,7 +42,7 @@ define(['app', 'services/productsService'], function (app) {
                                 break;
                             }
                         }
-                        filterProducts($scope.searchText);
+                        filterProducts($scope.filterName, $scope.filterType, $scope.filterProducer);
                     }, function (error) {
                         alert('Error deleting product: ' + error.message);
                     });
@@ -86,8 +86,12 @@ define(['app', 'services/productsService'], function (app) {
             //Watch searchText value and pass it and the branches to nameCityStateFilter
             //Doing this instead of adding the filter to ng-repeat allows it to only be run once (rather than twice)
             //while also accessing the filtered count via $scope.filteredCount above
-            $scope.$watch("searchText", function (filterText) {
-                filterProducts(filterText);
+            $scope.$watch("filterName", function (filterName) {
+                $scope.$watch("filterType", function (filterType) {
+                    $scope.$watch("filterProducer", function (filterProducer) {
+                        filterProducts(filterName, filterType, filterProducer);
+                    })
+                })
             });
         }
 
@@ -102,8 +106,8 @@ define(['app', 'services/productsService'], function (app) {
                 });
         }
 
-        function filterProducts(filterText) {
-            $scope.filteredProducts = $filter("nameProductFilter")($scope.products, filterText);
+        function filterProducts(filterName, filterType, filterProducer) {
+            $scope.filteredProducts = $filter("nameProductFilter")($scope.products, filterName, filterType, filterProducer);
             if ($scope.filteredProducts.length != null) {
                 $scope.filteredCount = $scope.filteredProducts.length;
             }
