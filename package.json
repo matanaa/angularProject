@@ -14,6 +14,7 @@
         "method-override": "^3.0.0",
         "mongodb": ">= 0.9.7-3-5",
         "mongoose": ">= 2.4.10",
-        "sprintf": "*"
+        "sprintf": "*",
+        "twitter": "^1.7.1"
     }
 }

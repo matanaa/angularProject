@@ -47,7 +47,7 @@ define(['app'], function (app) {
             //Make sure they're warned if they made a change but didn't save it
             //Call to $on returns a "deregistration" function that can be called to
             //remove the listener (see routeChange() for an example of using it)
-            onRouteChangeOff = $rootScope.$on('$locationChangeStart', routeChange);
+            //onRouteChangeOff = $rootScope.$on('$locationChangeStart', routeChange);
         }
 
         function routeChange(event, newUrl) {

@@ -1,6 +1,49 @@
 var db = require('../accessDB')
   , util = require('util');
 
+
+var twitter = require('twitter');
+var twitterclient = new twitter({
+    consumer_key: '5s6aVSkWieI37oBxXbDl3MeXb',
+    consumer_secret: 'hQVyNHND2PaMzRs10KJiBKlZPFvwLhhrDrb8wgXyDDQ7MCbObp',
+    access_token_key: '1026533641248301058-cGU7jQXsklWXD66csUclCTyPAfKY5i',
+    access_token_secret: 'Lw0TpbxVh2MHAeIvbPwy9OG7QJlsnEVbT0NMrTtX1gjGO'
+});
+
+exports.posttweet = function (request, responsee) {
+        twitterclient.post('statuses/update', {status: request.body.text},  function(error, tweet, response) {
+            if(error){
+                responsee.json({success: false, message: error.message});
+            } else {
+                responsee.json({success: true, message: 'Posted tweet'});
+            }
+        });
+};
+
+exports.gettweet = function (request, responsee) {
+    twitterclient.post('statuses/update', {status: request.params.text},  function(error, tweet, response) {
+        if(error){
+            responsee.json({success: false, message: error.message});
+        } else {
+            responsee.json({success: true, message: 'Posted tweet'});
+        }
+    });
+};
+
+
+ function tweet (msg) {
+    twitterclient.post('statuses/update', {status: msg},  function(error, msg) {
+        if(error){
+            return ({success: false, message: error.message});
+        } else {
+            return({success: true, message: 'Posted tweet'});
+        }
+    });
+};
+
+
+
+
 // GET
 exports.products = function (req, res) {
     console.log('*** products');
@@ -179,8 +222,9 @@ exports.addCustomer = function (req, res) {
           console.log('*** addCustomer err');
           res.json(false);
         } else {
-          console.log('*** addCustomer ok');
 
+          console.log('*** addCustomer ok');
+            tweet("welcome to " + req.body.firstName+" " + req.body.lastName)
           res.json(req.body);
         }
       });
