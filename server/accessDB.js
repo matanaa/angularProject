@@ -240,7 +240,7 @@ module.exports = {
                 const payload = {
                     admin: user.isAdmin,
                     user: user.firstName+ " "+user.lastName,
-                    id: user.id
+                    userid: user.id
 
                 };
                 var token = jwt.sign(payload, "mamamama", {
