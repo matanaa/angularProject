@@ -13,6 +13,9 @@ var app = express();
 var DB = require('./accessDB');
 var cookieParser = require('cookie-parser');
 var path = require('path');
+var bayes = require('bayes')
+var classifier = bayes()
+
 app.use(cookieParser());
 
 // Configuration
@@ -101,6 +104,47 @@ app.get("*", function (request, response) {
     response.sendFile(path.join(__dirname + "/../index.html"));
 
 });
+
+
+
+function processPositiveFile(inputFile) {
+    var fs = require('fs'),
+        readline = require('readline'),
+        instream = fs.createReadStream(inputFile),
+        outstream = new (require('stream'))(),
+        rl = readline.createInterface(instream, outstream);
+
+    rl.on('line', function (line) {
+        //console.log(line);
+        classifier.learn(line,'positive');
+    });
+
+    rl.on('close', function (line) {
+
+        console.log('done reading positive file for naive base .');
+    });
+}
+processPositiveFile(path.join(__dirname + "/lib/dataForbayes/good.txt"));
+
+function processNegativeFile(inputFile) {
+    var fs = require('fs'),
+        readline = require('readline'),
+        instream = fs.createReadStream(inputFile),
+        outstream = new (require('stream'))(),
+        rl = readline.createInterface(instream, outstream);
+
+    rl.on('line', function (line) {
+        //console.log(line);
+        classifier.learn(line,'negative');
+    });
+
+    rl.on('close', function (line) {
+
+        console.log('done reading negative file for naive base .');
+
+    });
+}
+processNegativeFile(path.join(__dirname + "/lib/dataForbayes/bad.txt"));
 
 // Start server
 
