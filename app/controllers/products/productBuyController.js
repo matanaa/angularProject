@@ -7,9 +7,7 @@ define(['app', 'services/productsService'], function (app) {
         var productID = ($routeParams.productID) ? parseInt($routeParams.productID) : 0,
             timer,
             onRouteChangeOff;
-        var newComment = ($routeParams.newComment) ? $routeParams.newComment.toString() : "",
-            timer,
-            onRouteChangeOff;
+
 
         $scope.product;
         $scope.totalProducer;
@@ -17,6 +15,7 @@ define(['app', 'services/productsService'], function (app) {
         $scope.buttonText = 'Buy now';
         $scope.updateStatus = false;
         $scope.errorMessage = '';
+        $scope.newComment ='';
 
         init();
 
@@ -48,7 +47,7 @@ define(['app', 'services/productsService'], function (app) {
         $scope.addComment = function()
         {
             if ($scope.editForm.$valid) {
-                    productsService.addCommentToProduct($scope.product, newComment).then(processSuccess, processError);
+                    productsService.addCommentToProduct($scope.product, $scope.newComment).then(processSuccess, processError);
             }
         }
 
