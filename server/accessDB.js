@@ -63,7 +63,7 @@ module.exports = {
         var product = new Product();
         // var s = {'id': state[0].id, 'abbreviation': state[0].abbreviation, 'name': state[0].name}
 
-        product.Name = req_body.Name;
+        product.name = req_body.name;
         product.price = req_body.price;
         product.type = req_body.type;
         product.stock = req_body.stock;

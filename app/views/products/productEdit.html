@@ -7,7 +7,7 @@
             <div>
                 <div class="row">
                     <div class="span12">
-                        <h4>{{ product.Name}} <!--(<a style="font-size:12pt" href="#/customerorders/{{customer.id}}">View Orders</a>)--></h4>
+                        <h4>{{ product.name}} <!--(<a style="font-size:12pt" href="#/customerorders/{{customer.id}}">View Orders</a>)--></h4>
                         <br />
                     </div>
                 </div>
@@ -18,7 +18,7 @@
                         Name:
                     </div>
                     <div class="span10">
-                        <input type="text" name="name" data-ng-model="product.Name" required />
+                        <input type="text" name="name" data-ng-model="product.name" required />
                         <span class="errorMessage" ng-show="editForm.Name.$dirty && editForm.Name.$invalid">
                             Name is required
                         </span>
