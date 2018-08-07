@@ -91,7 +91,7 @@ define(['app'], function (app) {
                 var custs = response.data;
                 extendCustomers(custs);
                 return {
-                    totalRecords: parseInt(response.headers('X-InlineCount')),
+                    totalRecords: custs.length,//parseInt(response.headers('X-InlineCount')),
                     results: custs
                 };
             });

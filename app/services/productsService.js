@@ -101,7 +101,7 @@ define(['app'], function (app) {
                 var products = response.data;
                 //extendCustomers(custs);
                 return {
-                    totalRecords: parseInt(response.headers('X-InlineCount')),
+                    totalRecords: products.length, //parseInt(response.headers('X-InlineCount')),
                     results: products
                 };
             });
