@@ -9,6 +9,7 @@ define(['app', 'services/productsService'], function (app) {
             onRouteChangeOff;
 
         $scope.product;
+        $scope.totalProducer;
         $scope.title = 'Buy now';
         $scope.buttonText = 'Buy now';
         $scope.updateStatus = false;
@@ -18,17 +19,17 @@ define(['app', 'services/productsService'], function (app) {
 
 
 
-        $scope.saveProduct = function () {
-
-            if ($scope.editForm.$valid) {
-                if (!$scope.product.id) {
-                    productsService.insertProduct($scope.product).then(processSuccess, processError);
-                }
-                else {
-                    productsService.updateProduct($scope.product).then(processSuccess, processError);
-                }
-            }
-        };
+        // $scope.saveProduct = function () {
+        //
+        //     if ($scope.editForm.$valid) {
+        //         if (!$scope.product.id) {
+        //             productsService.insertProduct($scope.product).then(processSuccess, processError);
+        //         }
+        //         else {
+        //             productsService.updateProduct($scope.product).then(processSuccess, processError);
+        //         }
+        //     }
+        // };
 
 
         $scope.buyProduct = function () {
@@ -68,6 +69,10 @@ define(['app', 'services/productsService'], function (app) {
             if (productID > 0) {
                 productsService.getProduct(productID).then(function (product) {
                     $scope.product = product;
+                    productsService.producerGroupBy(product.producer).then(function (producer){
+                        $scope.totalProducer=producer[0].total;
+                    } , processError);
+
                 }, processError);
             } else {
                 productsService.newProduct().then(function (product) {
@@ -109,10 +114,8 @@ define(['app', 'services/productsService'], function (app) {
 
 
         function processSuccess() {
-            $scope.editForm.$dirty = false;
             $scope.updateStatus = true;
-            $scope.title = 'Edit';
-            $scope.buttonText = 'Update';
+
             startTimer();
         }
 

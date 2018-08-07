@@ -82,6 +82,26 @@ module.exports = {
         });
     },
 
+    groupByProducer: function(producer,callback){
+        Product.aggregate(
+            [
+                { "$match": { "producer": { "$gte": producer, "$lte": producer }}},
+                { "$group": {
+                        "_id": producer,
+                        "total" : { $sum : 1 }
+                    }},
+            ],
+            function(err,results) {
+                if (err){
+                    callback("cant groupby:"+err, null);
+                }
+                else{
+                    callback(null, results);
+                }
+            }
+        )
+    },
+
     // get all the branches
     getBranches: function(callback) {
         console.log('*** accessDB.getBranches');

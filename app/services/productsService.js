@@ -68,6 +68,16 @@ define(['app'], function (app) {
             });
         };
 
+
+        productsFactory.producerGroupBy = function (id) {
+            //then does not unwrap data so must go through .data property
+            //success unwraps data automatically (no need to call .data property)
+            return $http.get(serviceBase + 'producerGroupBy/' + id).then(function (results) {
+                //extendCustomers([results.data]);
+                return results.data;
+            });
+        };
+
         // function extendProducts(products) {
         //     var custsLen = products.length;
         //     //Iterate through products
