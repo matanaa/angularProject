@@ -44,7 +44,7 @@ define(['app'], function (app) {
         }
 
         productsFactory.addCommentToProduct = function (product, newComment){
-            return $http.post(serviceBase + "addComment/"+ product.id, newComment).then(function (results) {
+            return $http.post(serviceBase + "addComment/", [newComment,product.id]).then(function (results) {
                 return results.data;
             })
         }

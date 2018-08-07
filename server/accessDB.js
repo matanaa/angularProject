@@ -253,7 +253,7 @@ module.exports = {
                 callback("customer not found ",null); }
             else
             {
-                Product.findOne({'id': req_body.id}, function(error, product) {
+                Product.findOne({'id': req_body[1]}, function(error, product) {
                     if (err || product==null) { console.log('*** accessDB.addCommentToProduct:product not found ' + err);
                         callback("product not found ",null); }
                     else
@@ -264,7 +264,7 @@ module.exports = {
                         product.comments.push({'dateTime': date.toDateString(),
                             'customerName': user.firstName + " " + user.lastName,
                             'customerId': user.id,
-                            'textContent': req_body.newComment});
+                            'textContent': req_body[0]});
 
                         product.save(function(err) {
                             if (err) { console.log('*** accessDB.addCommentToProduct err: ' + err); return callback(err); }
