@@ -20,7 +20,10 @@
         <div class="navbar-inner">
             <div class="container">
                 <a class="brand " href="#/">
-                    <img src="Content/Images/people.png" alt="logo"> {{ appTitle }}
+                    <canvas id="myCanvas" width="50" height="40">
+                        <img id="logo" src="Content/Images/people.png" alt="logo">
+                    </canvas>
+                     {{ appTitle }}
                 </a>
                 <ul class="nav nav-pills navBarPadding">
                     <li data-ng-class="{'active':highlight('/products')}"><a href="#/products">Products</a></li>
@@ -45,7 +48,7 @@
                     <footer>
                         <div class="row">
                             <div class="span12">
-                                <div style="width:100px;height:100px">
+                                <div style="width:100px;height:50px">
                                     <a href="http://www.accuweather.com/en/il/tel-aviv/215854/weather-forecast/215854"
                                        class="aw-widget-legal">
                                     </a>
@@ -58,7 +61,7 @@
                                          data-uid="awcc1477324979360"></div>
                                     <script type="text/javascript" src="http://oap.accuweather.com/launch.js">
                                     </script>
-                                    <canvas id="cvs" width="500" height="100">
+                                    <canvas id="cvs" width="500" height="50">
                                         Your browser does not support the HTML 5 Canvas.
                                     </canvas>
                                 </div>
@@ -94,6 +97,13 @@
     <!-- Load custom scripts via RequireJS -->
     <script src="/Scripts/require.js" data-main="/scripts/main"></script>
 
-
+<script>
+    window.onload = function() {
+        var canvas = document.getElementById("myCanvas");
+        var ctx = canvas.getContext("2d");
+        var img = document.getElementById("logo");
+        ctx.drawImage(img, 10, 10);
+    };
+</script>
 </body>
 </html>
