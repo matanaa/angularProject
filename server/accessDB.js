@@ -246,6 +246,37 @@ module.exports = {
         });
     },
 
+    addCommentToProduct: function(req_body, cust_id,  callback){
+        console.log('*** accessDB.addCommentToProduct');
+        Customer.findOne({'id': cust_id}, function(err, user) {
+            if (err || user==null) { console.log('*** accessDB.addCommentToProduct:customer not found ' + err);
+                callback("customer not found ",null); }
+            else
+            {
+                Product.findOne({'id': req_body.id}, function(error, product) {
+                    if (err || product==null) { console.log('*** accessDB.addCommentToProduct:product not found ' + err);
+                        callback("product not found ",null); }
+                    else
+                    {
+                        var amnt = 1;
+                        var date = new Date()
+                        //ord = {'product': product.name, 'price': product.price};
+                        product.comments.push({'dateTime': date.toDateString(),
+                            'customerName': user.firstName + " " + user.lastName,
+                            'customerId': user.id,
+                            'textContent': req_body.newComment});
+
+                        product.save(function(err) {
+                            if (err) { console.log('*** accessDB.addCommentToProduct err: ' + err); return callback(err); }
+
+                            callback(null);
+                        });
+                    }
+                })
+            }
+        });
+    },
+
 
     authenticate: function(email,password, callback){
         console.log('*** accessDB.authenticate');

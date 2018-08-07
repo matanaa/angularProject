@@ -18,6 +18,21 @@ var imagesSchema = new Schema({
     }
 });
 
+var CommentsSchema = new Schema({
+    textContent : {
+        type : String
+    },
+    customerId:{
+        type: Number
+    },
+    customerName:{
+        type : String
+    },
+    dateTime:{
+        type: Date
+    }
+});
+
 
 var ProductSchema = new Schema({
   name : {
@@ -38,6 +53,7 @@ var ProductSchema = new Schema({
     type : String, required: true, trim: true
   },
   images: [imagesSchema],
+  comments: [CommentsSchema]
 });
 
 ProductSchema.index({ id: 1, type: 1 }); // schema level

@@ -285,6 +285,21 @@ exports.addOrderToCustomer = function (req, res) {
 
 };
 
+exports.addCommentToProduct = function (req, res) {
+    console.log('*** addCommentToProduct');
+
+    db.addCommentToProduct(req.body, req.cookies['userid'], function(err) {
+        if (err) {
+            console.log('*** addCommentToProduct err' + util.inspect(err));
+            res.json(false);
+        } else {
+            console.log('*** addCommentToProduct ok');
+
+            res.json(req.body);
+        }
+    });
+};
+
 
 exports.deleteCustomer = function (req, res) {
   console.log('*** deleteCustomer');

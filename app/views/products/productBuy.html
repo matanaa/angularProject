@@ -68,24 +68,41 @@
 
                 </div>
 
-
                 <div class="row">
                     <div class="span12">
                         <form name="editForm" enctype="multipart/form-data" novalidate >
 
-                        <button type="submit" class="btn btn-primary" data-ng-click="buyProduct()" >{{buttonText}}</button>
-                        &nbsp;&nbsp;</div>
+                            <button type="submit" class="btn btn-primary" data-ng-click="buyProduct()" >Buy product</button>
+                        </form>
+                    </div>
                 </div>
                 <div class="row">
                     <br />
                     <div class="span10 label label-success show-hide-animation" data-ng-show="updateStatus">
-                        <i class="icon-thumbs-up icon-white"></i>&nbsp;&nbsp;Customer updated!
+                        <i class="icon-thumbs-up icon-white"></i>&nbsp;&nbsp;Product bought!
                     </div>
                     <div class="span10 label label-important show-hide-animation" data-ng-show="errorMessage">
                         <i class="icon-thumbs-down icon-white"></i>&nbsp;&nbsp;Error: {{ errorMessage }}
                     </div>
                 </div>
 
+                <form name="editForm" enctype="multipart/form-data" novalidate>
+                    <div class="span12 text-left">
+                        <h3>Comments</h3>
+                    </div>
+                    </br>
+                    </br>
+                    </br>
+                    </br>
+                    <div class="span12 text-left" data-ng-repeat="comment in product.comments">
+                        {{comment.customerName}}: {{comment.textContent}}</br>
+                        {{comment.dateTime.toLocaleString()}}
+                        </br>
+                        </br>
+                    </div>
+                    <input type="text" name="newComment"/>
+                    <button type="submit" class="btn btn-primary" data-ng-click="addComment()" >Add Comment</button>
+                </form>
             </div>
         </form>
     </div>
