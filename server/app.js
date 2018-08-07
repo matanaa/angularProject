@@ -9,17 +9,17 @@ var express = require('express')
     , protectJSON = require('./lib/protectJSON')
     , loginCheck = require('./lib/logincheck');
 
-//var app = module.exports = express();
 var app = express();
 var DB = require('./accessDB');
 var cookieParser = require('cookie-parser');
+var path = require('path');
 app.use(cookieParser());
 
 // Configuration
 app.use(protectJSON);
 
 app.set('views', __dirname + '/views');
-app.set('view engine', 'jade');
+
 var session = require('express-session');
 
 app.use(session({secret: 'gopalapuram'})); //*
@@ -54,13 +54,11 @@ function csrf(req, res, next) {
     next();
 }
 
-// Routes
-// app.configure(function(){
-//     app.use(loginCheck);
-// });
-//app.get('/', routes.index);
-app.get('/', routes.index);
 
+
+app.get("/", function (request, response) {
+    response.sendFile(path.join(__dirname + "/../index.html"));
+});
 
 // JSON API
 var router = express.Router();
@@ -97,7 +95,10 @@ app.delete('/api/dataservice/DeleteProduct/:id', api.deleteProduct);
 app.get('/api/dataservice/buyProduct/:id', api.addOrderToCustomer);
 
 // redirect all others to the index (HTML5 history)
-app.get('*', routes.index);
+//app.get('*', routes.index);
+app.get("*", function (request, response) {
+    response.sendFile(path.join(__dirname + "/../index.html"));
+});
 
 // Start server
 
