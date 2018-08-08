@@ -46,7 +46,7 @@ var ProductSchema = new Schema({
   type : {
     type : String, required: true, trim: true
   },
-  stock : {
+  bought : {
     type : Number, required: true, trim: true
   },
   producer : {

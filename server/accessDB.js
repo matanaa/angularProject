@@ -33,7 +33,7 @@ module.exports = {
     // get all the Products
     getProducts: function(callback) {
         console.log('*** accessDB.getProducts');
-        Product.find({},{"_id" :0,"name" : 1,"price" : 1,"type" : 1,"stock" : 1,"producer" : 1,"images" : 1}, function(err, Product) {
+        Product.find({},{"_id" :0,"name" : 1,"price" : 1,"type" : 1,"bought" : 1,"producer" : 1,"images" : 1}, function(err, Product) {
             callback(null, Product);
         });
     },
@@ -66,7 +66,7 @@ module.exports = {
         product.name = req_body.name;
         product.price = req_body.price;
         product.type = req_body.type;
-        product.stock = req_body.stock;
+        product.bought = req_body.bought;
         product.producer = req_body.producer;
         product.save(function(err, product) {
             if (err) {console.log('*** new product save err: ' + err); return callback(err); }
@@ -234,11 +234,20 @@ module.exports = {
                             'amount': req_body[1],
                             'total': product.price*req_body[1]});
 
+                        product.bought += req_body[1];
+
                         user.save(function(err) {
                             if (err) { console.log('*** accessDB.addOrderToCustomer err: ' + err); return callback(err); }
+                            else
+                            {
+                                product.save(function(err) {
+                                    if (err) { console.log('*** accessDB.addOrderToCustomer err: ' + err); return callback(err); }
 
-                            callback(null);
+                                    callback(null);
+                                });
+                            }
                         });
+
                     }
                 })
             }
