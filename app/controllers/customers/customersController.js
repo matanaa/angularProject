@@ -86,8 +86,12 @@ define(['app'], function (app) {
             //Watch searchText value and pass it and the customers to nameCityStateFilter
             //Doing this instead of adding the filter to ng-repeat allows it to only be run once (rather than twice)
             //while also accessing the filtered count via $scope.filteredCount above
-            $scope.$watch("searchText", function (filterText) {
-                filterCustomers(filterText);
+            $scope.$watch("filterFname", function (filterFname) {
+                $scope.$watch("filterLname", function (filterLname){
+                    $scope.$watch("filterCity", function (filterCity){
+                        filterCustomers(filterFname, filterLname, filterCity);
+                    })
+                })
             });
         }
 
@@ -102,8 +106,8 @@ define(['app'], function (app) {
             });
         }
 
-        function filterCustomers(filterText) {
-            $scope.filteredCustomers = $filter("nameCityStateFilter")($scope.customers, filterText);
+        function filterCustomers(filterFname, filterLname, filterCity) {
+            $scope.filteredCustomers = $filter("nameCityStateFilter")($scope.customers, filterFname, filterLname, filterCity);
             $scope.filteredCount = $scope.filteredCustomers.length;
         }
 
