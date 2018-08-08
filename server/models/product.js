@@ -52,7 +52,9 @@ var ProductSchema = new Schema({
   producer : {
     type : String, required: true, trim: true
   },
-  images: [imagesSchema],
+  images : {
+        type : String, required: true, trim: true
+    },
   comments: [CommentsSchema]
 });
 

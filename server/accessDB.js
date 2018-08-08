@@ -68,6 +68,7 @@ module.exports = {
         product.type = req_body.type;
         product.bought = req_body.bought;
         product.producer = req_body.producer;
+        product.images = req_body.images;
         product.save(function(err, product) {
             if (err) {console.log('*** new product save err: ' + err); return callback(err); }
 
