@@ -72,6 +72,9 @@ define(['app', 'services/productsService'], function (app) {
                 }
             });
         };
+        $scope.datefix = function (date) {
+            return  date.replace(/T/, ' ').replace(/\..+/, '');
+        }
 
         function init() {
             if ($routeParams.productID =="recommend") {
@@ -91,11 +94,6 @@ define(['app', 'services/productsService'], function (app) {
                     } , processError);
 
                 }, processError);
-            } else {
-                productsService.newProduct().then(function (product) {
-                    $scope.product = product;
-                });
-
             }
             //getStates();
 
