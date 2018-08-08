@@ -173,6 +173,25 @@ exports.producerGroupBy = function (req, res) {
     });
 };
 
+exports.AllproducerGroupBy = function (req, res) {
+    console.log('*** productsSummary');
+    db.groupByAllProducer(req.params.id,function(err, productsSummary) {
+        if (err) {
+            console.log('*** producerGroupBy err');
+            res.json({
+                data: productsSummary
+            });
+        } else {
+            console.log('*** producerGroupBy ok');
+            res.json(productsSummary);
+        }
+    });
+};
+
+
+
+
+
 exports.branches = function (req, res) {
     console.log('*** branches');
 

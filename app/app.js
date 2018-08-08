@@ -23,6 +23,25 @@ define(['services/routeResolver'], function () {
                 factory: $provide.factory,
                 service: $provide.service
             };
+            app.register.directive('bars', function ($parse) {
+                return {
+                    restrict: 'E',
+                    replace: true,
+                    template: '<div id="chart"></div>',
+                    link: function (scope, element, attrs) {
+                        Graph('http://127.0.0.1:3000/api/dataservice/AllproducerGroupBy', "chart");
+                        // var data = attrs.data.split(','),
+                        //     chart = d3.select('#chart')
+                        //         .append("div").attr("class", "chart")
+                        //         .selectAll('div')
+                        //         .data(data).enter()
+                        //         .append("div")
+                        //         .transition().ease("elastic")
+                        //         .style("width", function(d) { return d + "%"; })
+                        //         .text(function(d) { return d + "%"; });
+                    }
+                };
+            });
 
 
             //Define routes - controllers will be loaded dynamically

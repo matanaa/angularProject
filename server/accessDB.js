@@ -83,6 +83,31 @@ module.exports = {
         });
     },
 
+
+    groupByAllProducer: function(producer1,callback){
+        Product.aggregate(
+            [
+                 { $group : { _id : "$producer", "count" : { $sum : 1 } } },
+
+
+            ],
+            function(err,results) {
+                if (err){
+                    callback("cant groupby:"+err, null);
+                }
+                else{
+                    for (var i = 0; i < results.length; i++) {
+                        results[i].label=results[i]._id;
+                    }
+
+
+                        callback(null, results);
+                }
+            }
+        )
+    },
+
+
     groupByProducer: function(producer,callback){
         Product.aggregate(
             [

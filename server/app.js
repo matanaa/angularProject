@@ -18,7 +18,7 @@ var path = require('path');
 app.use(cookieParser());
 
 // Configuration
-app.use(protectJSON);
+//app.use(protectJSON);
 
 app.set('views', __dirname + '/views');
 
@@ -99,6 +99,7 @@ app.delete('/api/dataservice/DeleteProduct/:id', api.deleteProduct);
 app.post('/api/dataservice/buyProduct/', api.addOrderToCustomer);
 app.post('/api/dataservice/addComment/', api.addCommentToProduct);
 app.get('/api/dataservice/producerGroupBy/:id', api.producerGroupBy);
+app.get('/api/dataservice/AllproducerGroupBy', api.AllproducerGroupBy);
 
 // redirect all others to the index (HTML5 history)
 //app.get('*', routes.index);
