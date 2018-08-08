@@ -1,3 +1,4 @@
+<section id = "product">
 <div class="view">
     <div class="container">
         <header>
@@ -31,7 +32,7 @@
                     <div data-ng-if="!checkAdmin()"class="cardHeader"><a href="#/productBuy/{{product.id}}" class="white"><b>{{product.name}}</b> - {{product.producer}} <i class="icon-adjust icon-white editIcon"></i></a></div>
                     <div class="cardBody">
                         <div class="clearfix">
-                            <div class="pull-left"> 
+                            <div class="pull-left">
                                 <a href="#/productedit/{{product.id}}" class="white"><img data-ng-src="{{product.images}}" class="cardImage" /></a>
                             </div>
                             <div class="pull-left cardBodyRight">
@@ -94,3 +95,4 @@
         </div>
     </div>
 </div>
+</section>
