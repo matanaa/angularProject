@@ -16,6 +16,7 @@ define(['app', 'services/productsService'], function (app) {
         $scope.updateStatus = false;
         $scope.errorMessage = '';
         $scope.newComment ='';
+        $scope.amount = 1;
 
         init();
 
@@ -39,7 +40,7 @@ define(['app', 'services/productsService'], function (app) {
             if ($scope.editForm.$valid) {
                 if ($scope.product) {
 
-                    productsService.addToCustomer($scope.product).then(processSuccess, processError);
+                    productsService.addToCustomer($scope.product, $scope.amount).then(processSuccess, processError);
                 }
             }
         };

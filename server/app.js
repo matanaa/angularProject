@@ -94,7 +94,7 @@ app.get('/api/dataservice/BranchesSummary', api.branchesSummary);
 
 app.post('/api/dataservice/addProduct', api.addProduct);
 app.delete('/api/dataservice/DeleteProduct/:id', api.deleteProduct);
-app.get('/api/dataservice/buyProduct/:id', api.addOrderToCustomer);
+app.post('/api/dataservice/buyProduct/', api.addOrderToCustomer);
 app.post('/api/dataservice/addComment/', api.addCommentToProduct);
 app.get('/api/dataservice/producerGroupBy/:id', api.producerGroupBy);
 

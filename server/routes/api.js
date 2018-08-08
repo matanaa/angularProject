@@ -271,7 +271,7 @@ exports.addOrderToCustomer = function (req, res) {
 
 
 
-            db.addOrderToCustomer(req.params.id, req.cookies['userid'], function(err) {
+            db.addOrderToCustomer(req.body, req.cookies['userid'], function(err) {
                 if (err) {
                     console.log('*** addOrderToCustomer err' + util.inspect(err));
                     res.json({'status': false});
