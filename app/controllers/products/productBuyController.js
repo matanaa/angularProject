@@ -74,7 +74,16 @@ define(['app', 'services/productsService'], function (app) {
         };
 
         function init() {
-            if (productID > 0) {
+            if ($routeParams.productID =="recommend") {
+                productsService.getRecommendProduct().then(function (product) {
+                    $scope.product = product;
+                    productsService.producerGroupBy(product.producer).then(function (producer){
+                        $scope.totalProducer=producer[0].total;
+                    } , processError);
+
+                }, processError);
+            }
+        else if (productID > 0) {
                 productsService.getProduct(productID).then(function (product) {
                     $scope.product = product;
                     productsService.producerGroupBy(product.producer).then(function (producer){

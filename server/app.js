@@ -75,7 +75,7 @@ app.post('/api/dataservice/PostCustomer', api.addCustomer);
 app.get('/api/dataservice/products', api.products);
 app.get('/api/dataservice/productsSummary', api.productsSummary);
 app.get('/api/dataservice/productById/:id', api.product);
-app.get('/api/dataservice/productBNB/', api.productsNB);
+app.get('/api/dataservice/RecommendProduct/', api.productsNB);
 
 
 app.use(loginCheck);
