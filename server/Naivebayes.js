@@ -45,36 +45,37 @@ module.exports = {
         processNegativeFile(NegativeFile);
         processPositiveFile(PositiveFile);
     },
-    calcComments: function(comments){
+    calcComments: function(prodobj,callback){
         var maxScore = -1.0;//save the computed score classmem[item]
-        var prodId=-1;
-        prodobj = JSON.parse(comments);
+        var productToRet=null;
+        //prodobj = JSON.parse(comments);
 
-        for (prod in prodobj) // move on each car and check the score
-            {
+        for (var i = 0;i<prodobj.length ; i++)  // move on each car and check the score
+            {//prodobj[0].comments[0].textContent
                 //save the score
                 var good = 0.0;
                 var bad = 0.0;
-                for (cmt in prod["comments"])// move on each post and check the score
+                for (var j = 0, len = prodobj[i].comments.length; j < len; j++)
+// move on each post and check the score
                 {
-                    var result = classifier.categorize(cmt);//:)
+                    var result = classifier.categorize(prodobj[i].comments[j].textContent);//:)
                     if (result==("positive"))
                     { //check if have any result
-                        good += 1/ prod["comments"].length;//if yes normelaize it and save it
+                        good += 1/ prodobj[i].comments.length;//if yes normelaize it and save it
                     }
                     if (result==("negative"))
                     {
-                        bad += 1/ prod["comments"].length;//if yes normelaize it and save it
+                        bad += 1/ prodobj[i].comments.length;//if yes normelaize it and save it
                     }
                 }
-                if (good - bad > maxScore)//check the current car score
+                if (good - bad > maxScore || productToRet==null)//check the current car score
                 {
                     maxScore = good - bad;
-                    prodId = prod['id'];//if is max save it
+                    productToRet = prodobj[i];//if is max save it
                 }
 
             }
-
+        callback(null,productToRet);
         }
 
 };

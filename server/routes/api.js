@@ -1,6 +1,9 @@
 var db = require('../accessDB')
   , util = require('util');
 
+var nb= require('../Naivebayes');
+var path = require('path');
+nb.init(path.join(__dirname + "/../lib/dataForbayes/bad.txt"),path.join(__dirname + "/../lib/dataForbayes/good.txt"));
 
 var twitter = require('twitter');
 var twitterclient = new twitter({
@@ -126,6 +129,34 @@ exports.productsSummary = function (req, res) {
         }
     });
 };
+
+
+exports.productsNB = function (req, res) {
+    console.log('*** productsNB');
+    db.getProductsSummary(function(err, productsSummary) {
+        if (err) {
+            console.log('*** productsNB err');
+            res.json({
+                data: productsSummary
+            });
+        } else {
+            nb.calcComments(productsSummary,function(err, prodToSend) {
+                if (err) {
+                    console.log('*** productsNB err');
+                    res.json({
+                        data: prodToSend
+                    });
+                } else {
+                    console.log('*** productsNB ok');
+                    res.json(prodToSend);
+                }
+            });
+
+        }
+    });
+};
+
+
 
 exports.producerGroupBy = function (req, res) {
     console.log('*** productsSummary');

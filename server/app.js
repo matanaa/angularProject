@@ -13,7 +13,7 @@ var app = express();
 var DB = require('./accessDB');
 var cookieParser = require('cookie-parser');
 var path = require('path');
-var nb= require('./Naivebayes')
+
 
 app.use(cookieParser());
 
@@ -75,6 +75,8 @@ app.post('/api/dataservice/PostCustomer', api.addCustomer);
 app.get('/api/dataservice/products', api.products);
 app.get('/api/dataservice/productsSummary', api.productsSummary);
 app.get('/api/dataservice/productById/:id', api.product);
+app.get('/api/dataservice/productBNB/', api.productsNB);
+
 
 app.use(loginCheck);
 
@@ -106,7 +108,6 @@ app.get("*", function (request, response) {
 });
 
 
-nb.init(path.join(__dirname + "/lib/dataForbayes/bad.txt"),path.join(__dirname + "/lib/dataForbayes/good.txt"));
 
 
 // Start server
