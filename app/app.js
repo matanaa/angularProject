@@ -42,7 +42,7 @@ define(['services/routeResolver'], function () {
                     replace: true,
                     template: '<div id="chart1"></div>',
                     link: function (scope, element, attrs) {
-                        Graph('/api/dataservice/AllproducerGroupBy', "chart1");
+                        Graph('/api/dataservice/products', "chart1");
 
                     }
                 };

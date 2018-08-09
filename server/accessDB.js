@@ -34,6 +34,10 @@ module.exports = {
     getProducts: function(callback) {
         console.log('*** accessDB.getProducts');
         Product.find({},{"_id" :0,"name" : 1,"price" : 1,"type" : 1,"bought" : 1,"producer" : 1,"images" : 1}, function(err, Product) {
+            for (var i = 0; i < Product.length; i++) {
+                Product[i].label=Product[i].name;
+                Product[i].total=Product[i].bought;
+            }
             callback(null, Product);
         });
     },
