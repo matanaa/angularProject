@@ -24,7 +24,8 @@ define(['app'], function (app) {
                         window.localStorage.setItem('token', res.data.token);
                         document.cookie = "token="+res.data.token;
                         document.cookie = "isAdmin="+res.data.isAdmin;
-                        document.cookie = "userid="+res.data.userid
+                        document.cookie = "userid="+res.data.userid;
+                        document.cookie = "name="+res.data.user;
 
                         $http.defaults.headers.common.Authorization = res.data.token;
                         processSuccess()

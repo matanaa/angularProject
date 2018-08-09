@@ -379,7 +379,8 @@ exports.authenticate = function (req, res) {
             res.json({'status': true,
                 'token' : token.token,
                 'isAdmin' : token.admin,
-                'userid' : token.userid
+                'userid' : token.userid,
+                'user' : token.user
             });
         }
     });
