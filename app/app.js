@@ -67,6 +67,7 @@ define(['services/routeResolver'], function () {
                 .when('/orders', route.resolve('Orders', 'orders/'))
                 .when('/about', route.resolve('About'))
                 .when('/products', route.resolve('products', 'products/'))
+                .when('/chat/', route.resolve('chat', 'chat/'))
                 .when('/productedit/:productID', route.resolve('productEdit', 'products/'))
                 .when('/productBuy/:productID', route.resolve('productBuy', 'products/'))
                 .when('/branches', route.resolve('branches', 'branches/'))

@@ -32,10 +32,11 @@
                     <li data-ng-if="checkAdmin()" data-ng-class="{'active':highlight('/customers')}"><a href="#/customers">Customers</a></li>
                     <li data-ng-if="checkAdmin()" data-ng-class="{'active':highlight('/orders')}"><a href="#/orders">Orders</a></li>
                     <li data-ng-class="{'active':highlight('/branches')}"><a href="#/branches">Branches</a></li>
+                    <li data-ng-class="{'active':highlight('/chat')}"><a href="#/chat">Chat</a></li>
                   <!--  <li  data-ng-class="{'active':highlight('/logout')}"><a href="#/" data-ng-controller="loginController" data-ng-click="doLogout()" >logout</a></li>-->
 
 
-                    <li data-ng-class="{'active':highlight('/about')}"><a href="#/about">Statistics</a></li>
+                    <li data-ng-if="checkAdmin()" data-ng-class="{'active':highlight('/about')}"><a href="#/about">Statistics</a></li>
                 </ul>
             </div>
         </div>
