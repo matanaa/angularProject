@@ -209,12 +209,11 @@ module.exports = {
         });
     },
 
-    editCustomer: function(id, req_body, state, callback) {
+    editCustomer: function(id, req_body, callback) {
         console.log('*** accessDB.editCustomer');
 
-        var s = {'id': state[0].id, 'abbreviation': state[0].abbreviation, 'name': state[0].name}
 
-        Customer.find({'id': id}, {'_id': 1, 'firstName':1, 'lastName':1, 'city': 1, 'state': 1, 'stateId': 1, 'gender': 1, 'id': 1}, function(err, customer) {
+        Customer.findOne({'id': id}, {}, function(err, customer) {
             if (err) { return callback(err); }
 
             customer.firstName = req_body.firstName || customer.firstName;
@@ -222,9 +221,6 @@ module.exports = {
             customer.email = req_body.email || customer.email;
             customer.address = req_body.address || customer.address;
             customer.city = req_body.city || customer.city;
-            customer.state = s;
-            customer.stateId = s.id;
-            customer.zip = req_body.zip || customer.zip;
             customer.gender = req_body.gender || customer.gender;
 
 
@@ -241,7 +237,7 @@ module.exports = {
         console.log('*** accessDB.editProduct');
 
 
-        Product.find({'id': id}, {'_id': 1, 'name':1, 'price':1, 'type': 1, 'bought': 1, 'producer': 1, 'images': 1, 'id': 1}, function(err, product) {
+        Product.findOne({'id': id}, {'_id': 1, 'name':1, 'price':1, 'type': 1, 'bought': 1, 'producer': 1, 'images': 1, 'id': 1}, function(err, product) {
             if (err) { return callback(err); }
 
             product.name = req_body.name;

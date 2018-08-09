@@ -297,12 +297,8 @@ exports.addCustomer = function (req, res) {
 exports.editCustomer = function (req, res) {
   console.log('*** editCustomer');
 
-  db.getState(req.body.stateId, function(err, state) {
-    if (err) {
-      console.log('*** getState err');
-      res.json({'status': false});
-    } else {
-      db.editCustomer(req.params.id, req.body, state, function(err) {
+
+      db.editCustomer(req.params.id, req.body, function(err) {
         if (err) {
           console.log('*** editCustomer err' + util.inspect(err));
           res.json({'status': false});
@@ -312,8 +308,7 @@ exports.editCustomer = function (req, res) {
           res.json({'status': true});
         }
       });
-    }
-  });
+
 };
 
 exports.editProduct = function (req, res) {
