@@ -237,6 +237,29 @@ module.exports = {
         });
     },
 
+    editProduct: function(id, req_body, callback) {
+        console.log('*** accessDB.editProduct');
+
+
+        Product.find({'id': id}, {'_id': 1, 'name':1, 'price':1, 'type': 1, 'bought': 1, 'producer': 1, 'images': 1, 'id': 1}, function(err, product) {
+            if (err) { return callback(err); }
+
+            product.name = req_body.name;
+            product.price = req_body.price;
+            product.type = req_body.type;
+            product.bought = req_body.bought;
+            product.producer = req_body.producer;
+            product.images = req_body.images;
+
+            product.save(function(err) {
+                if (err) { console.log('*** accessDB.editProduct err: ' + err); return callback(err); }
+
+                callback(null);
+            });
+
+        });
+    },
+
     // delete a customer
     deleteCustomer: function(id, callback) {
         console.log('*** accessDB.deleteCustomer');

@@ -316,6 +316,22 @@ exports.editCustomer = function (req, res) {
   });
 };
 
+exports.editProduct = function (req, res) {
+    console.log('*** editProduct');
+
+    db.editProduct(req.params.id, req.body, function(err) {
+        if (err) {
+            console.log('*** editProduct err' + util.inspect(err));
+            res.json({'status': false});
+        } else {
+            console.log('*** editCustomer ok');
+
+            res.json({'status': true});
+        }
+    });
+};
+
+
 exports.addOrderToCustomer = function (req, res) {
     console.log('*** addOrderToCustomer');
 

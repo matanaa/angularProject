@@ -93,7 +93,7 @@ app.get('/api/dataservice/CustomerById/:id', api.customer);
 app.get('/api/dataservice/Branches', api.branches);
 app.get('/api/dataservice/BranchesSummary', api.branchesSummary);
 
-
+app.put('/api/dataservice/PutProduct/:id', api.editProduct);
 app.post('/api/dataservice/addProduct', api.addProduct);
 app.delete('/api/dataservice/DeleteProduct/:id', api.deleteProduct);
 app.post('/api/dataservice/buyProduct/', api.addOrderToCustomer);
