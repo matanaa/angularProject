@@ -13,9 +13,9 @@ define(['app'], function (app) {
             filterProducer = (!filterProducer)? "" : filterProducer.toLowerCase();
             for (var i = 0; i < product.length; i++) {
                 var prod = product[i];
-                if ((i.name.toLowerCase().indexOf(filterName) > -1 || filterName == "") &&
-                    (i.type.toLowerCase().indexOf(filterType) > -1 || filterType == "") &&
-                    (i.producer.toLowerCase().indexOf(filterProducer) > -1 || filterProducer == "")) {
+                if ((prod.name.toLowerCase().indexOf(filterName) > -1 || filterName == "") &&
+                    (prod.type.toLowerCase().indexOf(filterType) > -1 || filterType == "") &&
+                    (prod.producer.toLowerCase().indexOf(filterProducer) > -1 || filterProducer == "")) {
 
                     matches.push(i);
 
